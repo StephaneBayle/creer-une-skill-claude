@@ -8,8 +8,11 @@ mkdir -p "$OUT"
 "${PY:-$HOME/.cache/creation-skill/venv/bin/python}" - "$OUT" <<'PY'
 import sys, glob, os, pymupdf
 out = sys.argv[1]
-for f in glob.glob(f"{out}/slide-*.png"): os.remove(f)
+for f in glob.glob(f"{out}/slide-*.png") + glob.glob(f"{out}/slide-*.jpg"): os.remove(f)
 d = pymupdf.open(f"{out}/deck.pdf")
-for i, p in enumerate(d): p.get_pixmap(dpi=110).save(f"{out}/slide-{i+1:02d}.png")
+for i, p in enumerate(d):
+    pix = p.get_pixmap(dpi=110)
+    pix.save(f"{out}/slide-{i+1:02d}.png")                    # contrôle visuel
+    pix.save(f"{out}/slide-{i+1:02d}.jpg", jpg_quality=82)    # vignettes du document distribué (plus léger)
 print(d.page_count, "pages")
 PY

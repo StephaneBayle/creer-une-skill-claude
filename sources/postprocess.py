@@ -27,6 +27,18 @@ def rewrite_zip(path, transform):
     tmp.replace(path)
 
 
+def title_first(xml):
+    """Place la zone de titre en tête de l'arbre : c'est le premier texte lu par un lecteur d'écran.
+    Les titres ne chevauchent aucune forme, donc le changement d'ordre d'affichage est sans effet visuel."""
+    m = re.search(r'<p:sp>(?:(?!</?p:sp>).)*?<p:ph type="title"/>(?:(?!</?p:sp>).)*?</p:sp>', xml, re.S)
+    if not m:
+        return xml
+    title = m.group(0)
+    xml = xml[:m.start()] + xml[m.end():]
+    anchor = xml.index("</p:grpSpPr>") + len("</p:grpSpPr>")
+    return xml[:anchor] + title + xml[anchor:]
+
+
 def pptx():
     path = ROOT / "skills-claude-presentation.pptx"
     z = zipfile.ZipFile(path)
@@ -59,6 +71,7 @@ def pptx():
                 t = re.sub(r'<p:cNvPr id="(\d+)" name="TITLE"></p:cNvPr><p:cNvSpPr txBox="1"/><p:nvPr></p:nvPr>',
                            r'<p:cNvPr id="\1" name="Titre"></p:cNvPr><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="title"/></p:nvPr>',
                            t, count=1)
+                t = title_first(t)
             return t.encode()
         return data
 

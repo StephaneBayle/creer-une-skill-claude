@@ -274,17 +274,18 @@ L.catalog = async (s, d) => {
 
 L.github = async (s, d) => {
   title(s, d.title);
-  const n = d.steps.length, cw = 3.4, gap = (W - 1.6 - n * cw) / (n - 1);
-  for (let i = 0; i < n; i++) {
-    const [ic, a, b] = d.steps[i], x = 0.8 + i * (cw + gap);
-    card(s, x, 2.2, cw, 3.6, C.soft);
-    iconCircle(s, await icon(ic, C.white), x + cw / 2 - 0.75, 2.55, 1.5, i === 2 ? C.accent : C.ink);
-    T(s, a, { x, y: 4.25, w: cw, h: 0.6, fontSize: 28, bold: true, align: "center" });
-    T(s, b, { x: x + 0.2, y: 4.85, w: cw - 0.4, h: 0.8, fontSize: 18, color: C.muted, align: "center" });
-    if (i < n - 1) s.addImage({ data: await icon("FaArrowRight", C.accent), x: x + cw + gap / 2 - 0.3, y: 3.7, w: 0.6, h: 0.6 });
+  // trois gestes en typographie : grand numéro, verbe, précision ; pas de cartes ni de pastilles
+  const cw = 3.9;
+  for (let i = 0; i < d.steps.length; i++) {
+    const [ic, a, b] = d.steps[i], x = 0.6 + i * 4.2;
+    T(s, String(i + 1), { x, y: 1.8, w: 1.5, h: 1.9, fontSize: 120, bold: true, color: i === 2 ? C.accent : C.ink, valign: "middle" });
+    s.addImage({ data: await icon(ic, i === 2 ? C.accent : C.ink), x: x + 1.6, y: 2.45, w: 0.6, h: 0.6 });
+    T(s, a, { x, y: 3.85, w: cw, h: 0.65, fontSize: 32, bold: true });
+    T(s, b, { x, y: 4.5, w: cw - 0.3, h: 0.9, fontSize: 20, color: C.muted });
+    if (i < d.steps.length - 1) s.addShape("line", { x: x + 3.95, y: 2.0, w: 0, h: 3.3, line: { color: C.line, width: 1.5 } });
   }
-  card(s, 2.4, 6.1, 8.5, 0.6, C.blueTint);
-  T(s, [{ text: "Réf. : ", options: { bold: true, color: C.blue } }, { text: "github.com/anthropics/skills", options: { fontFace: MONO } }], { x: 2.4, y: 6.1, w: 8.5, h: 0.6, fontSize: 20, align: "center", valign: "middle" });
+  card(s, 0.6, 6.0, 7.2, 0.62, C.blueTint);
+  T(s, [{ text: "Réf. : ", options: { bold: true, color: C.blue } }, { text: "github.com/anthropics/skills", options: { fontFace: MONO } }], { x: 0.85, y: 6.0, w: 6.9, h: 0.62, fontSize: 20, valign: "middle" });
 };
 
 L.stop = async (s, d) => {
@@ -360,25 +361,25 @@ L.myths = async (s, d) => {
 
 L.planmode = async (s, d) => {
   title(s, d.title);
+  // étapes en pictos au trait, reliées par des chevrons (plus de pastilles rondes)
   const n = d.steps.length, cw = 2.2, gap = (W - 1.2 - n * cw) / (n - 1);
-  s.addShape("line", { x: 1.2, y: 2.95, w: W - 2.4, h: 0, line: { color: C.line, width: 4 } });
-  // zone « lecture seule » sous les étapes 2 à 4
   for (let i = 0; i < n; i++) {
     const [ic, a, b] = d.steps[i], x = 0.6 + i * (cw + gap);
     const col = i === 3 ? C.green : (i === 4 ? C.accent : C.ink);
-    iconCircle(s, await icon(ic, C.white), x + cw / 2 - 0.65, 2.3, 1.3, col);
-    T(s, a, { x: x - 0.15, y: 3.75, w: cw + 0.3, h: 0.55, fontSize: 22, bold: true, align: "center" });
-    if (b) T(s, b, { x: x - 0.15, y: 4.3, w: cw + 0.3, h: 0.45, fontSize: 16, italic: true, color: C.muted, align: "center" });
+    s.addImage({ data: await icon(ic, col), x: x + cw / 2 - 0.45, y: 2.1, w: 0.9, h: 0.9 });
+    T(s, a, { x: x - 0.15, y: 3.2, w: cw + 0.3, h: 0.55, fontSize: 22, bold: true, color: col, align: "center" });
+    if (b) T(s, b, { x: x - 0.15, y: 3.75, w: cw + 0.3, h: 0.45, fontSize: 16, italic: true, color: C.muted, align: "center" });
+    if (i < n - 1) s.addImage({ data: await icon("FaChevronRight", C.barStrong), x: x + cw + gap / 2 - 0.18, y: 2.35, w: 0.36, h: 0.4 });
   }
   const zx = 0.6 + (cw + gap) - 0.1, zw = 2 * (cw + gap) + cw + 0.2;
-  s.addShape("roundRect", { x: zx, y: 4.85, w: zw, h: 0.5, rectRadius: 0.25, fill: { color: C.blueTint }, line: { type: "none" } });
-  s.addImage({ data: await icon("FaLock", C.blue), x: zx + 0.25, y: 4.95, w: 0.3, h: 0.3 });
-  T(s, "Aucun fichier modifié", { x: zx + 0.65, y: 4.85, w: zw - 0.8, h: 0.5, fontSize: 17, bold: true, color: C.blue, valign: "middle" });
-  T(s, "Pour l'activer :", { x: 0.8, y: 5.85, w: 2.6, h: 0.6, fontSize: 20, bold: true, color: C.muted, valign: "middle" });
+  s.addShape("roundRect", { x: zx, y: 4.45, w: zw, h: 0.5, rectRadius: 0.25, fill: { color: C.blueTint }, line: { type: "none" } });
+  s.addImage({ data: await icon("FaLock", C.blue), x: zx + 0.25, y: 4.55, w: 0.3, h: 0.3 });
+  T(s, "Aucun fichier modifié", { x: zx + 0.65, y: 4.45, w: zw - 0.8, h: 0.5, fontSize: 18, bold: true, color: C.blue, valign: "middle" });
+  T(s, "Pour l'activer :", { x: 0.8, y: 5.6, w: 2.6, h: 0.6, fontSize: 20, bold: true, color: C.muted, valign: "middle" });
   for (let k = 0; k < d.keys.length; k++) {
     const x = 3.4 + k * 3.1;
-    s.addShape("roundRect", { x, y: 5.85, w: 2.8, h: 0.6, rectRadius: 0.1, fill: { color: C.white }, line: { color: C.ink, width: 1.5 }, shadow: { type: "outer", blur: 0, offset: 3, angle: 90, color: C.ink, opacity: 0.9 } });
-    T(s, d.keys[k], { x, y: 5.85, w: 2.8, h: 0.6, fontSize: 20, bold: true, align: "center", valign: "middle", fontFace: k === 1 ? MONO : FONT });
+    s.addShape("roundRect", { x, y: 5.6, w: 2.8, h: 0.6, rectRadius: 0.1, fill: { color: C.white }, line: { color: C.ink, width: 1.5 }, shadow: { type: "outer", blur: 0, offset: 3, angle: 90, color: C.ink, opacity: 0.9 } });
+    T(s, d.keys[k], { x, y: 5.6, w: 2.8, h: 0.6, fontSize: 20, bold: true, align: "center", valign: "middle", fontFace: k === 1 ? MONO : FONT });
   }
 };
 
@@ -485,18 +486,19 @@ L.threedoors = async (s, d) => {
 
 L.timeline = async (s, d) => {
   title(s, d.title);
-  const n = d.steps.length, cw = 2.2, gap = (W - 1.2 - n * cw) / (n - 1);
-  s.addShape("line", { x: 1.2, y: 3.45, w: W - 2.4, h: 0, line: { color: C.line, width: 4 } });
+  // un escalier : chaque étape monte d'une marche ; la marche 3 (Claude rédige) en accent
+  const n = d.steps.length, sw = 2.35;
   for (let i = 0; i < n; i++) {
-    const [ic, a, b] = d.steps[i], x = 0.6 + i * (cw + gap);
-    iconCircle(s, await icon(ic, C.white), x + cw / 2 - 0.7, 2.75, 1.4, i === 2 ? C.accent : C.ink);
-    T(s, String(i + 1), { x, y: 2.2, w: cw, h: 0.45, fontSize: 18, bold: true, color: C.muted, align: "center" });
-    T(s, a, { x: x - 0.1, y: 4.35, w: cw + 0.2, h: 0.6, fontSize: 26, bold: true, align: "center" });
-    T(s, b, { x: x - 0.1, y: 4.95, w: cw + 0.2, h: 0.9, fontSize: 17, color: C.muted, align: "center" });
+    const [ic, a, b] = d.steps[i], x = 0.6 + i * 2.45, y = 5.35 - i * 0.55;
+    const col = i === 2 ? C.accent : C.ink;
+    s.addShape("rect", { x, y, w: sw, h: 0.14, fill: { color: col }, line: { type: "none" } });
+    s.addShape("rect", { x, y: y + 0.14, w: sw, h: 6.2 - y, fill: { color: i === 2 ? C.accentTint : C.soft }, line: { type: "none" } });
+    s.addImage({ data: await icon(ic, col), x, y: y - 1.55, w: 0.5, h: 0.5 });
+    T(s, `${i + 1}. ${a}`, { x, y: y - 0.95, w: sw, h: 0.5, fontSize: 24, bold: true, color: col });
+    T(s, b, { x, y: y - 0.45, w: sw, h: 0.4, fontSize: 17, color: C.muted });
   }
-  s.addShape("roundRect", { x: 7.1, y: 6.15, w: 5.5, h: 0.6, rectRadius: 0.3, fill: { color: C.accentTint }, line: { type: "none" } });
-  s.addImage({ data: await icon("FaRotate", C.accent), x: 7.35, y: 6.28, w: 0.34, h: 0.34 });
-  T(s, "On boucle 2 ou 3 fois : c'est normal", { x: 7.85, y: 6.15, w: 4.7, h: 0.6, fontSize: 17, bold: true, color: C.accent, valign: "middle" });
+  s.addImage({ data: await icon("FaRotate", C.accent), x: 0.6, y: 6.47, w: 0.3, h: 0.3 });
+  T(s, "Entre 4 et 5, on boucle 2 ou 3 fois : c'est normal", { x: 1.05, y: 6.37, w: 8, h: 0.5, fontSize: 18, bold: true, color: C.accent, valign: "middle" });
 };
 
 L.demo = async (s, d) => {

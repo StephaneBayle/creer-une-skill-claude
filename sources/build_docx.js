@@ -54,12 +54,20 @@ function table(widths, rows, headerFill = INK) {
   });
 }
 
+// Vignettes : JPEG (poids) ; réduites pour les diapos sombres (encre à l'impression) ;
+// absentes pour les ouvertures de section, qui ne portent qu'un numéro et un titre.
+const DARK_KINDS = new Set(["title", "stop", "quizrules", "quizq", "quiza", "contact"]);
 function thumb(n) {
-  const f = path.join(BUILD, `slide-${String(n).padStart(2, "0")}.png`);
+  const kind = SLIDES[n - 1].kind;
+  if (kind === "section") {
+    return p([r("Diapo d'ouverture de partie : grand numéro et titre sur fond framboise.", { italics: true, color: MUTED })]);
+  }
+  const f = path.join(BUILD, `slide-${String(n).padStart(2, "0")}.jpg`);
   if (!fs.existsSync(f)) throw new Error("Vignette manquante, lancer render.sh : " + f);
+  const w = DARK_KINDS.has(kind) ? 280 : 440;
   return new Paragraph({
     style: "Body", alignment: AlignmentType.CENTER, spacing: { after: 160 },
-    children: [new ImageRun({ type: "png", data: fs.readFileSync(f), transformation: { width: 440, height: 248 }, altText: { title: `Diapo ${n}`, description: `Diapo ${n} : ${SLIDES[n - 1].title}`, name: `diapo${n}` } })],
+    children: [new ImageRun({ type: "jpg", data: fs.readFileSync(f), transformation: { width: w, height: Math.round(w * 9 / 16) }, altText: { title: `Diapo ${n}`, description: `Diapo ${n} : ${SLIDES[n - 1].title}`, name: `diapo${n}` } })],
   });
 }
 
@@ -74,10 +82,10 @@ children.push(
   p([r(`Présentation de ${TOTAL_MIN} minutes environ, suivie d'une mise en pratique. Public : utilisateurs de Claude, sans prérequis technique.`, { color: MUTED })]),
   new Paragraph({ style: "Body", spacing: { before: 1600, after: 80 }, children: [r(AUTHOR.name, { bold: true, size: 32, color: ACCENT })] }),
   p([r(AUTHOR.email)], { spacing: { after: 40 } }),
-  p([link("linkedin.com/in/stephanebayle", AUTHOR.linkedin)], { spacing: { after: 40 } }),
-  p([link("github.com/StephaneBayle", AUTHOR.github)]),
+  p([r("LinkedIn : "), link("profil de Stéphane Bayle", AUTHOR.linkedin), r("  (linkedin.com/in/stephanebayle)", { color: MUTED })], { spacing: { after: 40 } }),
+  p([r("GitHub : "), link("dépôts de Stéphane Bayle", AUTHOR.github), r("  (github.com/StephaneBayle)", { color: MUTED })]),
   new Paragraph({ style: "Body", spacing: { before: 400, after: 80 }, children: [r("Tous les supports de la séance", { bold: true, color: ACCENT })] }),
-  p([link("github.com/StephaneBayle/creer-une-skill-claude", REPO)]),
+  p([link("Dépôt GitHub des supports", REPO), r("  (github.com/StephaneBayle/creer-une-skill-claude)", { color: MUTED })]),
   p([r("Supports sous licence Creative Commons Attribution 4.0 (CC BY 4.0) : réutilisation et adaptation libres en citant l'auteur et le lien du dépôt. Scripts de génération sous licence MIT.", { color: MUTED, size: 18 })], { spacing: { before: 200 } }),
   new Paragraph({ style: "Body", children: [new PageBreak()] }),
 );
@@ -309,7 +317,7 @@ const links = [
   ["Claude Code dans des dossiers de notes et de documents", "https://code.claude.com/docs/en/common-workflows"],
   ["Fusion de Cowork et de Chat (annonce)", "https://claude.com/blog/cowork-is-now-claude"],
 ];
-links.forEach(([t, u]) => children.push(bullet([r(t + " : "), link(u, u)])));
+links.forEach(([t, u]) => children.push(bullet([link(t, u), r("  " + u.replace(/^https:\/\//, ""), { color: MUTED, size: 18 })])));
 children.push(h2("À vérifier le jour J"));
 children.push(bullet("Le libellé exact des menus dans la langue de l'interface (« Personnaliser » / « Customize », « Importer une skill »…)."));
 children.push(bullet("Que l'option « Exécution de code et création de fichiers » est bien active sur le poste de démo et sur ceux des participants."));
@@ -323,7 +331,7 @@ children.push(p("Ce support décrit Claude tel que documenté en septembre 2026.
 
 // Cas d'usage Academy
 children.push(new Paragraph({ style: "Body", children: [new PageBreak()] }), h1("Annexe G · Cas d'usage : la charte de marque"));
-children.push(p([r("Source : ", { bold: true }), r("Claude Academy, « Empaquetez vos directives de marque dans un skill » (environ 20 min, catégorie Marketing). "), link(ACADEMY, ACADEMY)]));
+children.push(p([r("Source : ", { bold: true }), link("Claude Academy, « Empaquetez vos directives de marque dans un skill »", ACADEMY), r(" (environ 20 min, catégorie Marketing).  " + ACADEMY.replace(/^https:\/\//, ""), { color: MUTED, size: 18 })]));
 children.push(h2("L'idée"));
 children.push(p("Donner une fois pour toutes votre charte graphique à Claude pour qu'il l'applique automatiquement à chaque présentation, document ou tableur, sans avoir à la rappeler."));
 children.push(h2("Les étapes de la ressource"));

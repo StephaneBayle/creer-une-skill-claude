@@ -15,7 +15,12 @@ done
 [[ -n $app ]] || { echo "Ni ${candidates[1]} ni ${candidates[2]} n'est installé" >&2; exit 1; }
 rm -f "$out"
 for attempt in 1 2 3; do
-  open -g -a "$app"; sleep 3
+  open -g -a "$app"
+  # attendre que l'application réponde aux commandes AppleScript (évite l'erreur -609 au premier essai)
+  for i in {1..20}; do
+    osascript -e "tell application \"$app\" to count documents" >/dev/null 2>&1 && break
+    sleep 1
+  done
   if osascript <<OSA 2>/tmp/export_pdf.err
 tell application "$app"
   set d to open (POSIX file "$in")
