@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+*.nosync/
+.venv/
+sources/build/
+*.tmp
+~$*
