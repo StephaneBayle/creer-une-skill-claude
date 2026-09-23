@@ -259,7 +259,7 @@ L.catalog = async (s, d) => {
     T(s, t, { x, y: Y + 0.3, w: 1.7, h: 0.5, fontSize: 16, bold: true, color: on ? C.white : C.muted, align: "center", valign: "middle" });
   });
   await badge(s, 2, X + 8.9, Y + 0.28);
-  const rows = [["FaFileWord", "Documents Word", true], ["FaFilePowerpoint", "Présentations", true], ["FaFileExcel", "Tableurs", false], ["FaFilePdf", "PDF", false]];
+  const rows = [["FaFileWord", "Documents Word", true], ["FaFilePowerpoint", "Présentations", true], ["FaFileExcel", "Tableurs", false], ["FaWandMagicSparkles", "skill-creator", true]];
   for (let i = 0; i < rows.length; i++) {
     const y = Y + 1.1 + i * 0.82;
     card(s, X + 3.2, y, 7.3, 0.66, C.soft);
@@ -501,6 +501,52 @@ L.timeline = async (s, d) => {
   T(s, "Entre 4 et 5, on boucle 2 ou 3 fois : c'est normal", { x: 1.05, y: 6.37, w: 8, h: 0.5, fontSize: 18, bold: true, color: C.accent, valign: "middle" });
 };
 
+L.creatorloop = async (s, d) => {
+  title(s, d.title);
+  // une boucle : six étapes posées sur un anneau, le nom de la skill au centre
+  const cx = W / 2, cy = 4.0, rx = 4.3, ry = 1.55;
+  s.addShape("ellipse", { x: cx - rx, y: cy - ry, w: 2 * rx, h: 2 * ry, fill: { type: "none" }, line: { color: C.accent, width: 2.5, dashType: "dash" } });
+  T(s, "skill-creator", { x: cx - 2, y: cy - 0.5, w: 4, h: 0.6, fontSize: 28, bold: true, fontFace: MONO, color: C.accent, align: "center", valign: "middle" });
+  T(s, "boucle jusqu'à satisfaction", { x: cx - 2, y: cy + 0.1, w: 4, h: 0.45, fontSize: 18, italic: true, color: C.muted, align: "center", valign: "middle" });
+  const n = d.steps.length, bw = 3.0, bh = 0.95;
+  for (let i = 0; i < n; i++) {
+    const ang = -Math.PI / 2 + (i * 2 * Math.PI) / n;
+    const px = cx + rx * Math.cos(ang), py = cy + ry * Math.sin(ang);
+    const [ic, a, b] = d.steps[i], x = px - bw / 2, y = py - bh / 2;
+    s.addShape("roundRect", { x, y, w: bw, h: bh, rectRadius: 0.12, fill: { color: i === 5 ? C.accentTint : C.soft }, line: { color: C.white, width: 3 } });
+    s.addImage({ data: await icon(ic, i === 5 ? C.accent : C.ink), x: x + 0.18, y: y + 0.25, w: 0.42, h: 0.42 });
+    T(s, `${i + 1}. ${a}`, { x: x + 0.75, y: y + 0.08, w: bw - 0.85, h: 0.45, fontSize: 19, bold: true, color: i === 5 ? C.accent : C.ink, valign: "middle", fit: "shrink" });
+    T(s, b, { x: x + 0.75, y: y + 0.5, w: bw - 0.85, h: 0.38, fontSize: 16, color: C.muted, valign: "middle" });
+  }
+  s.addImage({ data: await icon("FaBoxOpen", C.green), x: 0.6, y: 6.4, w: 0.38, h: 0.38 });
+  T(s, d.pack, { x: 1.1, y: 6.33, w: 11, h: 0.52, fontSize: 18, bold: true, color: C.green, valign: "middle" });
+};
+
+L.creatormatrix = async (s, d) => {
+  title(s, d.title);
+  const cols = [["FaComments", "Chat"], ["FaLaptopFile", "Cowork"], ["FaTerminal", "Code"]];
+  const x0 = 0.6, lw = 4.6, cw = 2.6, y0 = 1.75, rh = 0.66;
+  for (let c = 0; c < 3; c++) {
+    const x = x0 + lw + c * cw;
+    s.addImage({ data: await icon(cols[c][0], DOOR_COLORS[c]), x: x + 0.45, y: y0 + 0.12, w: 0.36, h: 0.36 });
+    T(s, cols[c][1], { x: x + 0.9, y: y0, w: 1.6, h: 0.6, fontSize: 22, bold: true, color: DOOR_COLORS[c], valign: "middle" });
+  }
+  for (let r = 0; r < d.rows.length; r++) {
+    const y = y0 + 0.7 + r * rh, row = d.rows[r];
+    if (r % 2 === 0) s.addShape("rect", { x: x0, y, w: lw + 3 * cw, h: rh, fill: { color: C.soft }, line: { type: "none" } });
+    T(s, row[0], { x: x0 + 0.2, y, w: lw - 0.3, h: rh, fontSize: 19, bold: true, valign: "middle" });
+    for (let c = 0; c < 3; c++) {
+      const v = row[c + 1], x = x0 + lw + c * cw;
+      if (v === "yes" || v === "no") {
+        s.addImage({ data: await icon(v === "yes" ? "FaCircleCheck" : "FaCircleXmark", v === "yes" ? C.green : C.red), x: x + 1.1, y: y + 0.15, w: 0.36, h: 0.36 });
+      } else {
+        T(s, v, { x: x + 0.1, y, w: cw - 0.2, h: rh, fontSize: 16, color: C.ink, align: "center", valign: "middle", fontFace: v.startsWith(".") ? MONO : FONT });
+      }
+    }
+  }
+  T(s, "D'après les instructions de skill-creator pour Chat, Cowork et Claude Code.", { x: x0, y: 6.35, w: 12, h: 0.45, fontSize: 16, italic: true, color: C.muted, valign: "middle" });
+};
+
 L.demo = async (s, d) => {
   title(s, d.title);
   const X = 0.8, Y = 2.0;
@@ -512,7 +558,7 @@ L.demo = async (s, d) => {
   s.addShape("ellipse", { x: X + 0.35, y: Y + 1.65, w: 0.55, h: 0.55, fill: { color: C.accent }, line: { type: "none" } });
   s.addImage({ data: await icon("FaWandMagicSparkles", C.white), x: X + 0.48, y: Y + 1.78, w: 0.29, h: 0.29 });
   T(s, [
-    { text: "Avec plaisir ! Trois questions :", options: { bold: true, breakLine: true } },
+    { text: "skill-creator : d'abord trois questions", options: { bold: true, breakLine: true } },
     { text: "Qui lit ces comptes rendus ?", options: { bullet: { type: "number" }, breakLine: true } },
     { text: "Quelle longueur maximum ?", options: { bullet: { type: "number" }, breakLine: true } },
     { text: "Avez-vous un exemple réussi ?", options: { bullet: { type: "number" } } },
@@ -521,9 +567,9 @@ L.demo = async (s, d) => {
   const cx = X + 1.1, cy = Y + 3.6;
   s.addShape("roundRect", { x: cx, y: cy, w: 6.2, h: 1.0, rectRadius: 0.15, fill: { color: C.greenTint }, line: { color: C.green, width: 1.5 } });
   s.addImage({ data: await icon("FaFileLines", C.green), x: cx + 0.25, y: cy + 0.25, w: 0.5, h: 0.5 });
-  T(s, "compte-rendu · skill prête", { x: cx + 0.95, y: cy, w: 3.4, h: 1.0, fontSize: 18, bold: true, valign: "middle" });
+  T(s, "compte-rendu.skill", { x: cx + 0.95, y: cy, w: 3.4, h: 1.0, fontSize: 18, bold: true, valign: "middle" });
   s.addShape("roundRect", { x: cx + 4.4, y: cy + 0.22, w: 1.6, h: 0.56, rectRadius: 0.28, fill: { color: C.green }, line: { type: "none" } });
-  T(s, "Enregistrer", { x: cx + 4.4, y: cy + 0.22, w: 1.6, h: 0.56, fontSize: 16, bold: true, color: C.white, align: "center", valign: "middle" });
+  T(s, "Save skill", { x: cx + 4.4, y: cy + 0.22, w: 1.6, h: 0.56, fontSize: 16, bold: true, color: C.white, align: "center", valign: "middle" });
   // étapes à droite
   const steps = ["Je demande", "Je réponds", "J'enregistre", "Je teste"];
   for (let i = 0; i < 4; i++) {

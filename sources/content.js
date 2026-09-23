@@ -73,6 +73,12 @@ const QUIZ = [
     ok: 2,
     why: "Claude Code travaille dans n'importe quel dossier, y compris un dossier de documents. Il existe un onglet Code dans l'application de bureau, donc pas besoin de terminal, et on lui écrit en français comme dans Chat.",
   },
+  {
+    q: "Pour vous aider à créer une skill, Claude s'appuie sur…",
+    a: ["brand-guidelines", "skill-creator", "docx", "Rien, il improvise"],
+    ok: 1,
+    why: "skill-creator est la skill d'Anthropic qui fabrique les skills : elle guide l'entretien, la rédaction du SKILL.md, les tests, l'amélioration et l'affinage de la description, puis empaquette le résultat. Elle est plus complète dans Cowork et Claude Code que dans Chat.",
+  },
 ];
 
 // kind : type de mise en page dans build_pptx.js
@@ -183,7 +189,7 @@ const SLIDES = [
     title: "Le catalogue : activer en un clic",
     notes: {
       objectif: "Montrer où trouver et activer les skills et plugins déjà prêts.",
-      script: "Dans Claude, sur le web, dans l'application ou dans Cowork, ouvrez « Personnaliser » dans la barre de gauche (Customize en anglais). Vous y trouvez les onglets Skills et Plugins. Côté Skills, Anthropic fournit des skills prêtes à l'emploi, par exemple pour produire un document Word, un PowerPoint, un tableur ou un PDF propre. Il suffit de basculer l'interrupteur. Côté Plugins, « Parcourir les plugins » ouvre le catalogue : un plugin, c'est un paquet prêt à l'emploi qui réunit plusieurs skills, parfois avec des connecteurs vers vos outils (Notion, Canva, Figma, Atlassian…). On clique sur « Installer ». Deux conditions : l'option « Exécution de code et création de fichiers » doit être activée dans Paramètres › Capacités ; et en offre Team ou Enterprise, c'est l'administrateur qui autorise les skills pour l'organisation. Les noms exacts des menus peuvent varier selon la version : vérifiez-les le jour J sur votre écran.",
+      script: "Dans Claude, sur le web, dans l'application ou dans Cowork, ouvrez « Personnaliser » dans la barre de gauche (Customize en anglais). Vous y trouvez les onglets Skills et Plugins. Côté Skills, Anthropic fournit des skills prêtes à l'emploi, par exemple pour produire un document Word, un PowerPoint, un tableur ou un PDF propre. Il suffit de basculer l'interrupteur. Vérifiez au passage que skill-creator est activée : c'est la skill d'Anthropic sur laquelle Claude s'appuie pour vous aider à créer les vôtres. Côté Plugins, « Parcourir les plugins » ouvre le catalogue : un plugin, c'est un paquet prêt à l'emploi qui réunit plusieurs skills, parfois avec des connecteurs vers vos outils (Notion, Canva, Figma, Atlassian…). On clique sur « Installer ». Deux conditions : l'option « Exécution de code et création de fichiers » doit être activée dans Paramètres › Capacités ; et en offre Team ou Enterprise, c'est l'administrateur qui autorise les skills pour l'organisation. Les noms exacts des menus peuvent varier selon la version : vérifiez-les le jour J sur votre écran.",
       question: "Qui a déjà ouvert le menu Personnaliser ? Qu'y avez-vous trouvé ?",
       transition: "Et si la skill qui vous intéresse n'est pas dans le catalogue ? Direction GitHub.",
     },
@@ -311,15 +317,52 @@ const SLIDES = [
     steps: [
       ["FaMagnifyingGlass", "Repérer", "une tâche récurrente"],
       ["FaComment", "Décrire", "avec un exemple"],
-      ["FaWandMagicSparkles", "Générer", "Claude rédige"],
+      ["FaWandMagicSparkles", "Générer", "avec skill-creator"],
       ["FaFlask", "Tester", "sur un vrai cas"],
       ["FaSliders", "Ajuster", "la description"],
     ],
     notes: {
       objectif: "Donner une méthode simple, réutilisable pendant l'atelier.",
-      script: "Un : repérer une tâche qui revient au moins une fois par semaine et qui se fait toujours de la même façon. Deux : la décrire à Claude comme à un nouveau collègue, avec si possible un exemple réussi (un ancien compte rendu, un mail type). Trois : laisser Claude générer la skill ; il va vous poser des questions, répondez-y franchement. Quatre : tester, dans une nouvelle conversation, avec une demande naturelle, sans nommer la skill. Préparez trois demandes : deux qui doivent déclencher la skill, et une qui ne doit pas (par exemple « résume cet article » pour une skill de compte rendu). La mention « Using… » dans la réflexion de Claude indique si la skill a servi. Comparez aussi avec le résultat obtenu sans la skill : c'est ce qui prouve qu'elle apporte quelque chose. Anthropic résume la méthode ainsi : on conçoit avec un premier Claude, on teste avec un second dans une conversation neuve, et on rapporte au premier ce qu'on a observé. Cinq : ajuster. Si elle ne se déclenche pas, c'est presque toujours la description qu'il faut revoir. Si le résultat n'est pas bon, ce sont les instructions ou l'exemple. On boucle entre quatre et cinq deux ou trois fois : c'est normal.",
+      script: "Un : repérer une tâche qui revient au moins une fois par semaine et qui se fait toujours de la même façon. Deux : la décrire à Claude comme à un nouveau collègue, avec si possible un exemple réussi (un ancien compte rendu, un mail type). Trois : laisser Claude générer la skill. Il s'appuie pour cela sur skill-creator, la skill d'Anthropic qui fabrique les skills : elle lui fait poser les bonnes questions, puis rédiger un SKILL.md conforme aux bonnes pratiques. Répondez-lui franchement. Quatre : tester, dans une nouvelle conversation, avec une demande naturelle, sans nommer la skill. Préparez trois demandes : deux qui doivent déclencher la skill, et une qui ne doit pas (par exemple « résume cet article » pour une skill de compte rendu). La mention « Using… » dans la réflexion de Claude indique si la skill a servi. Choisissez des demandes réalistes et un peu substantielles : Claude ne consulte pas une skill pour une tâche qu'il sait faire seul en une étape (« lis ce fichier »), même si la description correspond. Comparez aussi avec le résultat obtenu sans la skill : c'est ce qui prouve qu'elle apporte quelque chose. Anthropic résume la méthode ainsi : on conçoit avec un premier Claude, on teste avec un second dans une conversation neuve, et on rapporte au premier ce qu'on a observé. Cinq : ajuster. Si elle ne se déclenche pas, c'est presque toujours la description qu'il faut revoir. Si le résultat n'est pas bon, ce sont les instructions ou l'exemple. On boucle entre quatre et cinq deux ou trois fois : c'est normal.",
       question: "",
       transition: "Je vous montre à quoi ça ressemble en vrai.",
+    },
+  },
+  {
+    kind: "creatorloop", sec: "s5", time: 120,
+    title: "skill-creator : la skill qui fabrique les skills",
+    steps: [
+      ["FaComments", "Comprendre", "4 questions"],
+      ["FaPenNib", "Rédiger", "le SKILL.md"],
+      ["FaFlask", "Tester", "2 ou 3 cas réels"],
+      ["FaScaleBalanced", "Comparer", "avec / sans skill"],
+      ["FaSliders", "Améliorer", "selon vos retours"],
+      ["FaBullseye", "Affiner la description", "20 demandes test"],
+    ],
+    pack: "Puis empaqueter : un fichier .skill et son bouton « Save skill »",
+    notes: {
+      objectif: "Présenter skill-creator, l'outil central de la création de skills, et sa boucle de travail.",
+      script: "Quand vous demandez à Claude de créer une skill, il ne part pas de zéro : il ouvre skill-creator, une skill écrite par Anthropic dont le métier est… de fabriquer des skills. C'est elle qui donne la méthode. Un : comprendre, avec quatre questions : que doit faire la skill, quand doit-elle se déclencher (avec quels mots vous la demandez), quel format de résultat, et faut-il prévoir des tests. Elle creuse ensuite les cas particuliers et vous demande des exemples. Deux : rédiger le SKILL.md, en appliquant les bonnes pratiques (description précise, texte concis, fichiers annexes si besoin). Trois : tester sur deux ou trois demandes réalistes, celles que vous feriez vraiment. Quatre : comparer le résultat avec et sans la skill, pour vérifier qu'elle apporte quelque chose. Cinq : améliorer à partir de vos retours ; skill-creator cherche à généraliser plutôt qu'à coller à vos exemples. Six : affiner la description, en la testant sur une vingtaine de demandes, dont certaines ne doivent PAS déclencher la skill. À la fin, elle empaquette le tout en un fichier .skill : dans Claude, la carte du fichier affiche un bouton « Save skill » qui l'installe dans votre profil, si votre organisation l'autorise. Elle sait aussi améliorer une skill existante, en gardant son nom. Retenez : pour créer une skill, on ne demande pas « écris-moi un fichier », on dit « aide-moi à créer une skill », et skill-creator prend la main.",
+      question: "Laquelle de ces six étapes sauteriez-vous spontanément si vous faisiez seul ? (Souvent : comparer et affiner la description.)",
+      transition: "Mais skill-creator ne fait pas tout partout. Voyons ce qui change selon la porte.",
+    },
+  },
+  {
+    kind: "creatormatrix", sec: "s5", time: 90,
+    title: "skill-creator selon la porte",
+    rows: [
+      ["Entretien et rédaction", "yes", "yes", "yes"],
+      ["Tests sur cas réels", "un par un", "yes", "yes"],
+      ["Comparaison avec / sans skill", "no", "yes", "yes"],
+      ["Résultats à relire", "dans la conversation", "page dédiée", "page dédiée"],
+      ["Affiner la description", "no", "yes", "yes"],
+      ["Installation", "« Save skill »", "« Save skill »", ".claude/skills/"],
+    ],
+    notes: {
+      objectif: "Montrer que skill-creator est plus complète dans Cowork et Code, et en faire un argument pour oser Code.",
+      script: "skill-creator s'adapte à l'endroit où elle tourne, et ses propres instructions le disent. Dans Chat, elle fait l'essentiel : l'entretien, la rédaction, et des tests qu'elle exécute elle-même, un par un. En revanche, elle n'y compare pas les résultats avec et sans la skill, elle présente les résultats dans la conversation, et elle ne peut pas affiner automatiquement la description, qui demande l'outil en ligne de commande de Claude Code. Dans Cowork et dans Claude Code, elle peut lancer les tests en parallèle, les comparer à une version sans skill, vous ouvrir une page de résultats à relire et commenter, et optimiser la description sur une vingtaine de demandes. Conclusion pratique : pour une première skill simple, Chat suffit. Pour une skill qui compte, que toute une équipe va utiliser, passez par Cowork ou Code : vous aurez la version complète de la méthode. Dans Claude Code, si skill-creator n'est pas déjà disponible via votre compte, on l'installe avec le plugin d'exemples du dépôt anthropics/skills (commandes dans la fiche B8).",
+      question: "",
+      transition: "Voyons-la à l'œuvre.",
     },
   },
   {
@@ -327,7 +370,7 @@ const SLIDES = [
     title: "Démo : on le demande à Claude",
     notes: {
       objectif: "Démystifier la création par une démonstration courte (en direct, ou sur la maquette si le réseau fait défaut).",
-      script: "Si la connexion le permet, faites la démo en direct dans Chat ; sinon, commentez la maquette. Tapez : « Aide-moi à créer une skill qui transforme mes notes de réunion en compte rendu à notre format. » Claude s'appuie sur sa skill intégrée de création de skills (« skill-creator ») et pose des questions : qui lit ces comptes rendus ? quelle longueur ? avez-vous un exemple ? Répondez, collez un ancien compte rendu réussi. Claude rédige le SKILL.md et vous le montre : faites lire la description à voix haute à la salle. Puis il empaquette le tout en un fichier de skill : enregistrez-le (selon la version, un bouton d'enregistrement s'affiche, ou l'on télécharge le fichier et on l'importe avec le bouton « + »), puis vérifiez qu'il est activé dans la liste des skills (Personnaliser › Skills, ou Paramètres › Capacités selon l'interface). Enfin, testez : ouvrez une nouvelle conversation, collez des notes en vrac et dites simplement « tu peux m'en faire un compte rendu ? ». La skill doit se déclencher seule : on le voit à la mention « Using compte-rendu » (utilisation de la skill) dans la réflexion de Claude. Montrez cet indice à la salle, c'est le meilleur moyen de savoir si une skill a été utilisée. Si la démo prend du retard, arrêtez-vous après l'enregistrement : le test sera fait pendant l'atelier.",
+      script: "Si la connexion le permet, faites la démo en direct dans Chat ; sinon, commentez la maquette. Tapez : « Aide-moi à créer une skill qui transforme mes notes de réunion en compte rendu à notre format. » Claude ouvre skill-creator : montrez à la salle la mention correspondante dans sa réflexion. Il pose les questions de la méthode : que doit faire la skill, quand la déclencher, quel format, qui lit ces comptes rendus, avez-vous un exemple ? Répondez, collez un ancien compte rendu réussi. Claude rédige le SKILL.md et vous le montre : faites lire la description à voix haute à la salle. Il propose ensuite deux ou trois demandes test : acceptez-les, c'est l'étape que tout le monde oublie. Puis il empaquette le tout en un fichier .skill : cliquez sur « Save skill » sur la carte du fichier (si ce bouton n'apparaît pas, par exemple parce que l'organisation ne l'autorise pas, téléchargez le fichier et importez-le avec le bouton « + »), puis vérifiez qu'il est activé dans la liste des skills (Personnaliser › Skills, ou Paramètres › Capacités selon l'interface). Enfin, testez : ouvrez une nouvelle conversation, collez des notes en vrac et dites simplement « tu peux m'en faire un compte rendu ? ». La skill doit se déclencher seule : on le voit à la mention « Using compte-rendu » (utilisation de la skill) dans la réflexion de Claude. Montrez cet indice à la salle, c'est le meilleur moyen de savoir si une skill a été utilisée. Si la démo prend du retard, arrêtez-vous après l'enregistrement : le test sera fait pendant l'atelier.",
       question: "Pendant que Claude rédige : « D'après vous, quelle question va-t-il nous poser ensuite ? »",
       transition: "Ce qui fait la différence entre une skill moyenne et une bonne skill tient en trois secrets.",
     },
@@ -395,7 +438,7 @@ const SLIDES = [
     title: "Quiz : levez votre carton !",
     notes: {
       objectif: "Lancer l'interaction et vérifier que chacun a ses cartons.",
-      script: "Huit questions. Pour chacune, je lis la question et les quatre réponses, je compte jusqu'à trois et tout le monde lève son carton en même temps. Pas de honte à se tromper : c'est justement ce qui nous intéresse. On regarde la répartition des couleurs dans la salle, puis je révèle la bonne réponse. Si vous n'avez pas de cartons, levez 1 à 4 doigts : un doigt pour A, deux pour B, trois pour C, quatre pour D.",
+      script: "Neuf questions. Pour chacune, je lis la question et les quatre réponses, je compte jusqu'à trois et tout le monde lève son carton en même temps. Pas de honte à se tromper : c'est justement ce qui nous intéresse. On regarde la répartition des couleurs dans la salle, puis je révèle la bonne réponse. Si vous n'avez pas de cartons, levez 1 à 4 doigts : un doigt pour A, deux pour B, trois pour C, quatre pour D.",
       question: "",
       transition: "Question 1.",
     },

@@ -97,7 +97,7 @@ children.push(
     ["Mode d'emploi", "matériel et déroulé minuté"],
     ["Notes diapo par diapo", "31 fiches : objectif, timing, script, question, transition"],
     ["Annexe A · Glossaire", ""],
-    ["Annexe B · Fiches pas-à-pas", "activer, importer, créer, partager"],
+    ["Annexe B · Fiches pas-à-pas", "activer, importer, créer, partager, skill-creator"],
     ["Annexe C · Exemple de SKILL.md complet", ""],
     ["Annexe D · Corrigé du quiz", ""],
     ["Annexe E · Atelier de mise en pratique", "consigne, idées, grille"],
@@ -152,6 +152,7 @@ children.push(table([2400, 7238], [
   ["Chat", "La conversation classique avec Claude, sur le web ou dans l'application."],
   ["Cowork", "Le mode où Claude travaille dans vos dossiers et fichiers pour mener une tâche de bout en bout. En cours de fusion avec Chat en un seul « Claude »."],
   ["Claude Code", "Claude qui travaille dans un dossier de votre ordinateur, avec plus de contrôle. Disponible dans un onglet de l'application de bureau ; aucun code à écrire."],
+  ["skill-creator", "La skill d'Anthropic qui fabrique les skills : entretien, rédaction du SKILL.md, tests, amélioration, affinage de la description et empaquetage. Claude l'utilise dès que vous lui demandez de créer une skill."],
   ["Mode plan", "Mode de Claude Code où Claude lit et propose un plan sans rien modifier, puis attend votre accord."],
   ["Plugin", "Un paquet prêt à installer qui réunit plusieurs skills, parfois avec des connecteurs vers vos outils."],
   ["Catalogue / marketplace", "L'ensemble des skills et plugins proposés dans Personnaliser, par Anthropic et ses partenaires."],
@@ -177,10 +178,12 @@ children.push(num("Personnaliser › Plugins.", "b3"));
 children.push(num("Bouton « + » dans la section Plugins personnels › « Ajouter depuis un dépôt ».", "b3"));
 children.push(num("Coller l'adresse du dépôt GitHub, puis installer les plugins proposés.", "b3"));
 children.push(h2("B4. Créer une skill avec Claude (Chat ou Cowork)"));
+children.push(num("Vérifier que skill-creator est activée : Personnaliser › Skills, parmi les skills d'Anthropic (fiche B8).", "b4"));
 children.push(num("Ouvrir une nouvelle conversation (Chat) ou une tâche Cowork, et y joindre si possible un exemple réussi.", "b4"));
 children.push(num("Copier le prompt de départ ci-dessous et compléter les crochets.", "b4"));
 children.push(num("Répondre aux questions de Claude, relire le SKILL.md proposé, en particulier la description.", "b4"));
-children.push(num("Enregistrer le fichier de skill que Claude remet (bouton d'enregistrement, ou téléchargement puis import par le bouton « + »), et vérifier qu'elle est activée : Personnaliser › Skills, ou Paramètres › Capacités selon l'interface.", "b4"));
+children.push(num("Accepter les 2 ou 3 demandes test que propose skill-creator, puis relire les résultats.", "b4"));
+children.push(num("Enregistrer le fichier .skill : bouton « Save skill » sur la carte du fichier (sinon, le télécharger et l'importer avec le bouton « + »). Vérifier qu'elle est activée : Personnaliser › Skills, ou Paramètres › Capacités selon l'interface.", "b4"));
 children.push(num("Tester dans une NOUVELLE conversation, sans nommer la skill, avec trois demandes : deux qui doivent la déclencher, une qui ne doit pas. La mention « Using [nom de la skill] » dans la réflexion de Claude montre qu'elle a servi.", "b4"));
 children.push(num("Si le résultat ne convient pas, revenir dans la conversation de création et décrire précisément ce qui a manqué : Claude met la skill à jour.", "b4"));
 children.push(...code([
@@ -208,6 +211,7 @@ children.push(p("Une skill enregistrée dans votre compte Claude se retrouve aus
 children.push(...code([
   "/plugin marketplace add anthropics/skills",
   "/plugin install document-skills@anthropic-agent-skills",
+  "/plugin install example-skills@anthropic-agent-skills   (contient skill-creator)",
   "",
   "~/.claude/skills/<nom>/SKILL.md     skill personnelle",
   ".claude/skills/<nom>/SKILL.md       skill partagée avec le projet",
@@ -237,6 +241,34 @@ children.push(table([2600, 7038], [
   ["Auto", "Agit seul ; un second modèle vérifie chaque action et bloque ce qui dépasse la demande."],
 ]));
 children.push(p([r("Dans Chat ou Cowork, on imite le mode plan en écrivant : « propose-moi d'abord un plan, n'écris rien avant mon accord ».", { italics: true, color: MUTED })], { spacing: { before: 160 } }));
+
+children.push(h2("B8. skill-creator : la skill qui fabrique les skills"));
+children.push(p("skill-creator est une skill écrite par Anthropic. Dès que vous demandez à Claude de créer ou d'améliorer une skill, il l'ouvre et suit sa méthode. Mieux vaut donc formuler « aide-moi à créer une skill qui… » que « écris-moi un fichier »."));
+children.push(h3("Où la trouver"));
+children.push(bullet("Claude (web, application, Cowork) : Personnaliser › Skills, parmi les skills d'Anthropic ; vérifier qu'elle est activée."));
+children.push(bullet("Claude Code : disponible via votre compte si elle y est activée ; sinon /plugin marketplace add anthropics/skills, puis /plugin install example-skills@anthropic-agent-skills."));
+children.push(h3("Sa méthode, en six temps"));
+children.push(num("Comprendre : que doit faire la skill ? quand doit-elle se déclencher (avec quels mots) ? quel format de résultat ? faut-il prévoir des tests ? Puis les cas particuliers, les exemples, les critères de réussite.", "b8"));
+children.push(num("Rédiger le SKILL.md selon les bonnes pratiques : description précise, texte concis qui explique le pourquoi, fichiers annexes si besoin.", "b8"));
+children.push(num("Tester sur 2 ou 3 demandes réalistes, celles qu'un utilisateur ferait vraiment.", "b8"));
+children.push(num("Comparer les résultats avec et sans la skill (Cowork et Code).", "b8"));
+children.push(num("Améliorer à partir de vos retours, en généralisant plutôt qu'en collant aux exemples ; recommencer jusqu'à satisfaction.", "b8"));
+children.push(num("Affiner la description sur une vingtaine de demandes, dont une partie ne doit PAS déclencher la skill (Cowork et Code).", "b8"));
+children.push(p("Enfin, elle empaquette la skill en un fichier .skill. Dans Claude, la carte du fichier affiche un bouton « Save skill » qui l'installe dans votre profil, si votre organisation autorise la création de skills."));
+children.push(h3("Selon la porte"));
+children.push(table([3238, 2133, 2133, 2134], [
+  ["Étape", "Chat", "Cowork", "Code"],
+  ["Entretien et rédaction", "oui", "oui", "oui"],
+  ["Tests sur cas réels", "oui, un par un", "oui, en parallèle", "oui, en parallèle"],
+  ["Comparaison avec / sans skill", "non", "oui", "oui"],
+  ["Résultats à relire", "dans la conversation", "page de résultats", "page de résultats"],
+  ["Affiner la description", "non", "oui", "oui"],
+  ["Installation", "« Save skill »", "« Save skill »", "dossier .claude/skills/"],
+]));
+children.push(h3("Bon à savoir"));
+children.push(bullet("Pour améliorer une skill existante, demandez-le à Claude en la nommant : skill-creator garde son nom d'origine, pour que la nouvelle version remplace l'ancienne."));
+children.push(bullet("Pour des tests pertinents, choisissez des demandes un peu substantielles : Claude ne consulte pas une skill pour une tâche simple qu'il sait faire seul en une étape."));
+children.push(bullet("Vous pouvez dire « pas besoin de tests, on avance » : la méthode est souple. Mais pour une skill partagée à une équipe, gardez les tests."));
 
 // Exemple complet
 children.push(new Paragraph({ style: "Body", children: [new PageBreak()] }), h1("Annexe C · Exemple de SKILL.md complet"));
@@ -317,6 +349,7 @@ const links = [
   ["Gérer les skills d'une organisation", "https://support.claude.com/en/articles/13119606-provision-and-manage-skills-for-your-organization"],
   ["Utiliser les plugins", "https://support.claude.com/en/articles/13837440-use-plugins-in-claude"],
   ["Dépôt d'exemples d'Anthropic", "https://github.com/anthropics/skills"],
+  ["skill-creator : son code source (dépôt anthropics/skills)", "https://github.com/anthropics/skills/tree/main/skills/skill-creator"],
   ["Bonnes pratiques de rédaction de skills (Anthropic)", "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices"],
   ["Skills dans Claude Code", "https://code.claude.com/docs/en/skills"],
   ["Standard ouvert Agent Skills", "https://agentskills.io"],
@@ -329,7 +362,8 @@ const links = [
 links.forEach(([t, u]) => children.push(bullet([link(t, u), r("  " + u.replace(/^https:\/\//, ""), { color: MUTED, size: 18 })])));
 children.push(h2("À vérifier le jour J"));
 children.push(bullet("Le libellé exact des menus dans la langue de l'interface (« Personnaliser » / « Customize », « Importer une skill »…) et l'emplacement de la liste des skills : l'aide cite Personnaliser › Skills, le tutoriel Academy Paramètres › Capacités › Skills."));
-children.push(bullet("Comment le fichier de skill créé en conversation s'enregistre (bouton ou téléchargement puis import), et si le menu d'une skill permet de la télécharger."));
+children.push(bullet("Que skill-creator est activée sur le poste de démo et ceux des participants, et que le bouton « Save skill » apparaît bien (il dépend des droits de l'organisation)."));
+children.push(bullet("Si le menu d'une skill permet de la télécharger, pour le partage."));
 children.push(bullet("Dans le dossier de démo Code, créer à l'avance le dossier vide .claude/skills/ et régler le mode sur Manuel ou Plan."));
 children.push(bullet("Que l'option « Exécution de code et création de fichiers » est bien active sur le poste de démo et sur ceux des participants."));
 children.push(bullet("En Team/Enterprise : que l'administrateur a autorisé les skills et le partage, et quel est le réglage de publication (à partir du 2 octobre 2026, « Relecture requise » s’appliquera par défaut aux organisations qui n’ont rien choisi)."));
@@ -387,7 +421,7 @@ const doc = new Document({
   numbering: {
     config: [
       { reference: "bullets", levels: [{ level: 0, format: LevelFormat.BULLET, text: "•", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 540, hanging: 270 } } } }] },
-      ...["steps", "b1", "b2", "b3", "b4", "b7", "e1", "g1"].map((ref) => ({ reference: ref, levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 540, hanging: 360 } } } }] })),
+      ...["steps", "b1", "b2", "b3", "b4", "b7", "b8", "e1", "g1"].map((ref) => ({ reference: ref, levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 540, hanging: 360 } } } }] })),
     ],
   },
   sections: [{
