@@ -42,12 +42,13 @@ sources/build_all.sh
 ## Licences
 
 - **Supports pédagogiques** (présentation, notes du présentateur PDF et Word, cartons du quiz, et textes de
-  `sources/content.js`) : [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE-CC-BY-4.0.txt).
+  `sources/content.js`) : [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE).
   Vous pouvez les réutiliser, les adapter et les diffuser, y compris commercialement, à condition de créditer
   l'auteur, d'indiquer le lien vers ce dépôt et de signaler vos modifications.
   Crédit suggéré : *« Créer une skill dans Claude », Stéphane Bayle, CC BY 4.0,
   github.com/StephaneBayle/creer-une-skill-claude*.
-- **Code de génération** (scripts du dossier `sources/`) : [licence MIT](LICENSE).
+- **Code de génération** (scripts du dossier `sources/` : `*.js`, `*.py`, `*.sh`, `tokens.json`, `package.json`),
+  à l'exception des textes de `sources/content.js` : [licence MIT](LICENSES/MIT.txt).
 
 Les marques citées (Claude, Anthropic, GitHub…) appartiennent à leurs propriétaires ; ces supports n'en sont pas
 affiliés. Les ressources externes citées (aide Claude, Claude Academy) restent sous leurs propres conditions.
