@@ -319,7 +319,7 @@ L.doors = async (s, d) => {
     T(s, name, { x, y: 4.3, w: cw, h: 0.6, fontSize: 32, bold: true, align: "center", color: DOOR_COLORS[i] });
     T(s, desc, { x: x + 0.3, y: 5.0, w: cw - 0.6, h: 0.9, fontSize: 19, align: "center" });
   }
-  T(s, "Votre skill vous suit partout.", { x: 0.5, y: 6.6, w: W - 1, h: 0.4, fontSize: 18, italic: true, color: C.muted, align: "center" });
+  T(s, "Skill du compte, disponible partout.", { x: 0.5, y: 6.6, w: W - 1, h: 0.4, fontSize: 18, italic: true, color: C.muted, align: "center" });
 };
 
 L.proscons = async (s, d) => {

@@ -180,8 +180,9 @@ children.push(h2("B4. Créer une skill avec Claude (Chat ou Cowork)"));
 children.push(num("Ouvrir une nouvelle conversation (Chat) ou une tâche Cowork, et y joindre si possible un exemple réussi.", "b4"));
 children.push(num("Copier le prompt de départ ci-dessous et compléter les crochets.", "b4"));
 children.push(num("Répondre aux questions de Claude, relire le SKILL.md proposé, en particulier la description.", "b4"));
-children.push(num("Accepter l'enregistrement : la skill apparaît dans Personnaliser › Skills.", "b4"));
-children.push(num("Tester dans une NOUVELLE conversation avec une demande naturelle, sans nommer la skill.", "b4"));
+children.push(num("Enregistrer le fichier de skill que Claude remet (bouton d'enregistrement, ou téléchargement puis import par le bouton « + »), et vérifier qu'elle est activée : Personnaliser › Skills, ou Paramètres › Capacités selon l'interface.", "b4"));
+children.push(num("Tester dans une NOUVELLE conversation, sans nommer la skill, avec trois demandes : deux qui doivent la déclencher, une qui ne doit pas. La mention « Using [nom de la skill] » dans la réflexion de Claude montre qu'elle a servi.", "b4"));
+children.push(num("Si le résultat ne convient pas, revenir dans la conversation de création et décrire précisément ce qui a manqué : Claude met la skill à jour.", "b4"));
 children.push(...code([
   "Aide-moi à créer une skill.",
   "Tâche : [ce que je fais chaque semaine, ex. transformer mes notes",
@@ -195,7 +196,7 @@ children.push(...code([
 children.push(h2("B5. Partager une skill"));
 children.push(table([2600, 7038], [
   ["Pour qui", "Comment"],
-  ["Quelques personnes (toutes offres)", "Personnaliser › Skills › menu « … » de la skill › télécharger le .zip, puis l'envoyer. Le destinataire l'importe (fiche B2)."],
+  ["Quelques personnes (toutes offres)", "Envoyer le fichier de la skill (celui remis par Claude à la création, ou un .zip du dossier). Selon la version, le menu « … » de la skill permet aussi de la télécharger. Le destinataire l'importe (fiche B2)."],
   ["Des collègues (Team/Enterprise)", "Menu « … » › « Partager » › saisir des noms ou des e-mails (groupes : Enterprise). Ils peuvent activer la skill, pas la modifier."],
   ["Toute l'organisation (Team/Enterprise)", "« Publier dans l'organisation ». Selon le réglage de l'administrateur, une relecture peut être exigée."],
   ["Le monde entier", "Publier le dossier sur GitHub, ou l'intégrer à un plugin."],
@@ -214,12 +215,15 @@ children.push(...code([
 children.push(h2("B7. Créer une skill avec Claude Code, sans terminal"));
 children.push(p([r("Première fois ? Travaillez sur une ", {}), r("copie", { bold: true }), r(" de votre dossier : vous ne risquez rien.")]));
 children.push(num("Ouvrir l'application Claude sur ordinateur, onglet Code, et choisir le dossier de travail (par exemple un dossier « charte » contenant la charte en PDF et un exemple réussi).", "b7"));
+children.push(num("Vérifier le mode de départ : sur Pro, Max et Team, Claude Code démarre en mode auto (il agit sans demander, un second modèle vérifie). Pour une première fois, choisir Manuel ou Plan.", "b7"));
 children.push(num("Passer en mode plan : sélecteur de mode à côté de la zone de message, touches Maj + Tab jusqu'à « mode plan », ou commencer le message par /plan.", "b7"));
 children.push(num("Écrire la demande (prompt ci-dessous). Claude lit les fichiers mais ne modifie rien.", "b7"));
 children.push(num("Relire le plan proposé. Pour corriger, répondre « continue à planifier » avec vos remarques (« ajoute une section sur le logo »).", "b7"));
 children.push(num("Approuver. Pour une première fois, choisir l'option qui fait valider chaque modification une par une.", "b7"));
+children.push(num("Si le dossier .claude/skills/ vient d'être créé, ouvrir une nouvelle session sur le même dossier : Claude Code ne voit pas encore ce nouveau dossier. Astuce : le créer vide à l'avance.", "b7"));
 children.push(num("Tester : taper / suivi du nom de la skill (ex. /charte-graphique), ou faire une demande naturelle (« fais-moi une diapo de bienvenue »).", "b7"));
-children.push(num("Retrouver la skill dans le dossier .claude/skills/ du projet. Pour l'utiliser aussi dans Claude sur le web : demander à Claude Code de la compresser en .zip, puis l'importer (fiche B2).", "b7"));
+children.push(num("Retrouver la skill dans le dossier .claude/skills/ du projet. Elle reste locale : la synchronisation va du compte Claude vers Claude Code, pas l'inverse. Pour l'utiliser aussi dans Claude sur le web : demander à Claude Code de la compresser en .zip, puis l'importer (fiche B2).", "b7"));
+children.push(num("Avant d'installer une skill venue d'ailleurs dans Claude Code, lire la ligne allowed-tools de son en-tête : elle peut autoriser des commandes sans rien vous demander.", "b7"));
 children.push(...code([
   "/plan Crée une skill charte-graphique à partir des fichiers de ce dossier,",
   "pour appliquer notre charte à toute présentation ou tout document.",
@@ -237,12 +241,13 @@ children.push(p([r("Dans Chat ou Cowork, on imite le mode plan en écrivant : «
 // Exemple complet
 children.push(new Paragraph({ style: "Body", children: [new PageBreak()] }), h1("Annexe C · Exemple de SKILL.md complet"));
 children.push(p("À montrer pendant l'atelier comme point de comparaison."));
+children.push(bullet([r("Nom", { bold: true }), r(" : minuscules, chiffres et tirets, 64 caractères au plus, sans les mots « claude » ni « anthropic ».")]));
+children.push(bullet([r("Description", { bold: true }), r(" : une seule ligne, 200 caractères au plus dans Claude, à la troisième personne, avec ce que fait la skill ET « Utiliser quand… ».")]));
+children.push(bullet([r("Fichiers annexes", { bold: true }), r(" : les citer depuis le SKILL.md en disant quand les lire, sur un seul niveau (pas de renvoi en cascade). Garder le SKILL.md sous 500 lignes.")]));
 children.push(...code([
   "---",
   "name: compte-rendu",
-  "description: Rédige un compte rendu de réunion à notre format (1 page,",
-  "  décisions, tableau d'actions). Utiliser quand l'utilisateur colle des",
-  "  notes de réunion ou demande un CR, une synthèse ou un relevé de décisions.",
+  "description: Rédige un compte rendu de réunion d'une page à notre format. Utiliser quand l'utilisateur colle des notes de réunion ou demande un CR ou une synthèse.",
   "---",
   "",
   "# Compte rendu de réunion",
@@ -258,7 +263,7 @@ children.push(...code([
   "- Si une échéance manque, écrire « à définir » plutôt qu'inventer.",
   "",
   "## Exemple réussi",
-  "Voir exemples/cr-2026-09-12.md",
+  "Avant de rédiger, lire exemples/cr-type.md et en reprendre la structure.",
 ]));
 
 // Corrigé du quiz
@@ -293,10 +298,13 @@ children.push(h2("Grille d'auto-évaluation"));
 children.push(table([7238, 2400], [
   ["Critère", "Oui / Non"],
   ["La description dit ce que fait la skill ET quand l'utiliser (« Utiliser quand… »)", ""],
-  ["La skill se déclenche seule dans une nouvelle conversation", ""],
+  ["La skill se déclenche seule dans une nouvelle conversation (mention « Using… »)", ""],
+  ["Elle ne se déclenche PAS sur une demande sans rapport", ""],
+  ["La description tient en 200 caractères et le nom est en minuscules avec tirets", ""],
   ["Elle contient au moins un exemple réussi", ""],
   ["Elle traite une seule tâche", ""],
   ["Elle ne contient aucune donnée personnelle ni confidentielle", ""],
+  ["Elle ne contient aucune date ni mention « cette année » qui vieillira", ""],
 ]));
 
 // Liens et points à vérifier
@@ -309,6 +317,7 @@ const links = [
   ["Gérer les skills d'une organisation", "https://support.claude.com/en/articles/13119606-provision-and-manage-skills-for-your-organization"],
   ["Utiliser les plugins", "https://support.claude.com/en/articles/13837440-use-plugins-in-claude"],
   ["Dépôt d'exemples d'Anthropic", "https://github.com/anthropics/skills"],
+  ["Bonnes pratiques de rédaction de skills (Anthropic)", "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices"],
   ["Skills dans Claude Code", "https://code.claude.com/docs/en/skills"],
   ["Standard ouvert Agent Skills", "https://agentskills.io"],
   ["Cas d'usage : empaqueter sa charte de marque (Claude Academy)", ACADEMY],
@@ -319,7 +328,9 @@ const links = [
 ];
 links.forEach(([t, u]) => children.push(bullet([link(t, u), r("  " + u.replace(/^https:\/\//, ""), { color: MUTED, size: 18 })])));
 children.push(h2("À vérifier le jour J"));
-children.push(bullet("Le libellé exact des menus dans la langue de l'interface (« Personnaliser » / « Customize », « Importer une skill »…)."));
+children.push(bullet("Le libellé exact des menus dans la langue de l'interface (« Personnaliser » / « Customize », « Importer une skill »…) et l'emplacement de la liste des skills : l'aide cite Personnaliser › Skills, le tutoriel Academy Paramètres › Capacités › Skills."));
+children.push(bullet("Comment le fichier de skill créé en conversation s'enregistre (bouton ou téléchargement puis import), et si le menu d'une skill permet de la télécharger."));
+children.push(bullet("Dans le dossier de démo Code, créer à l'avance le dossier vide .claude/skills/ et régler le mode sur Manuel ou Plan."));
 children.push(bullet("Que l'option « Exécution de code et création de fichiers » est bien active sur le poste de démo et sur ceux des participants."));
 children.push(bullet("En Team/Enterprise : que l'administrateur a autorisé les skills et le partage, et quel est le réglage de publication (à partir du 2 octobre 2026, « Relecture requise » s’appliquera par défaut aux organisations qui n’ont rien choisi)."));
 children.push(bullet(`Les démos en direct (diapos ${slideNo("demo")} et ${slideNo("codedemo")}) : prévoir les maquettes comme solution de repli si le réseau fait défaut.`));
