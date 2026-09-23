@@ -54,6 +54,24 @@ function table(widths, rows, headerFill = INK) {
   });
 }
 
+// Encadré : tableau d'une cellule, fond teinté, titre en accent.
+function encadre(titre, paras) {
+  return new Table({
+    width: { size: CONTENT_W, type: WidthType.DXA },
+    columnWidths: [CONTENT_W],
+    rows: [new TableRow({ children: [new TableCell({
+      width: { size: CONTENT_W, type: WidthType.DXA },
+      shading: { type: ShadingType.CLEAR, fill: TK.color.accentTint, color: "auto" },
+      borders: { top: { style: BorderStyle.SINGLE, size: 12, color: ACCENT }, bottom: { style: BorderStyle.SINGLE, size: 12, color: ACCENT }, left: { style: BorderStyle.SINGLE, size: 12, color: ACCENT }, right: { style: BorderStyle.SINGLE, size: 12, color: ACCENT } },
+      margins: { top: 160, bottom: 160, left: 220, right: 220 },
+      children: [
+        new Paragraph({ style: "Body", spacing: { after: 120 }, children: [r(titre, { bold: true, color: ACCENT, size: 26 })] }),
+        ...paras.map((runs) => new Paragraph({ style: "Body", spacing: { after: 100 }, children: runs })),
+      ],
+    })] })],
+  });
+}
+
 // Vignettes : JPEG (poids) ; réduites pour les diapos sombres (encre à l'impression) ;
 // absentes pour les ouvertures de section, qui ne portent qu'un numéro et un titre.
 const DARK_KINDS = new Set(["title", "stop", "quizrules", "quizq", "quiza", "contact"]);
@@ -269,6 +287,15 @@ children.push(h3("Bon à savoir"));
 children.push(bullet("Pour améliorer une skill existante, demandez-le à Claude en la nommant : skill-creator garde son nom d'origine, pour que la nouvelle version remplace l'ancienne."));
 children.push(bullet("Pour des tests pertinents, choisissez des demandes un peu substantielles : Claude ne consulte pas une skill pour une tâche simple qu'il sait faire seul en une étape."));
 children.push(bullet("Vous pouvez dire « pas besoin de tests, on avance » : la méthode est souple. Mais pour une skill partagée à une équipe, gardez les tests."));
+children.push(encadre("Cowork ou Code pour créer une skill ?", [
+  [r("Où vit la skill. ", { bold: true }), r("Cowork : dans votre compte Claude (fichier .skill, bouton « Save skill »), donc disponible partout : Chat, Cowork et Claude Code. Code : dans un dossier (.claude/skills/ du projet, ou ~/.claude/skills/ pour vous), utilisable tout de suite mais seulement dans Claude Code.")],
+  [r("Sens de la synchronisation. ", { bold: true }), r("Du compte vers Code, jamais l'inverse. Une skill créée dans Code s'importe dans le compte en compressant son dossier (fiche B2).")],
+  [r("Réservé à Code. ", { bold: true }), r("Paramètres ($ARGUMENTS), commande lancée avant la skill pour injecter des données, lancement manuel uniquement (disable-model-invocation), exécution isolée (context: fork), mode plan, historique des versions avec Git. Écrits pour Code, ces réglages ne fonctionnent pas ou autrement dans Cowork et Chat.")],
+  [r("Relire les tests de skill-creator. ", { bold: true }), r("Cowork : une page HTML à ouvrir soi-même, les commentaires reviennent sous forme de fichier. Code : la page s'ouvre directement.")],
+  [r("Partager en équipe. ", { bold: true }), r("Cowork : Partager ou Publier dans l'organisation (Team/Enterprise). Code : ranger la skill dans le dépôt Git du projet.")],
+  [r("En pratique. ", { bold: true }), r("Skill métier pour tous : Cowork. Skill à versionner, relire ou partager avec une équipe technique : Code. Le meilleur des deux : créer et tester dans Code, puis importer le .skill dans le compte.")],
+  [r("Cowork fusionne avec Chat en ce moment : l'interface peut évoluer. Le mode plan n'est documenté que pour Claude Code.", { italics: true, color: MUTED })],
+]));
 
 // Exemple complet
 children.push(new Paragraph({ style: "Body", children: [new PageBreak()] }), h1("Annexe C · Exemple de SKILL.md complet"));

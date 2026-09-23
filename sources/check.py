@@ -9,10 +9,10 @@ PPTX = ROOT / "skills-claude-presentation.pptx"
 URLS = {"https://www.linkedin.com/in/stephanebayle/", "https://github.com/StephaneBayle",
         "https://github.com/StephaneBayle/creer-une-skill-claude",
         "https://academy.claude.com/fr/use-cases/package-your-brand-guidelines-in-a-skill"}
-TARGET_MIN, TARGET_MAX = 45, 56  # durée visée, en minutes
+TARGET_MIN, TARGET_MAX = 45, 58  # durée visée, en minutes
 MAX_WORDS = 50  # mots à l'écran, pastille et pied de page compris
 # maquettes et tableaux denses : le texte y fait partie de l'image
-MOCKUP_KINDS = {"hook", "anatomy", "catalog", "demo", "codedemo", "proscons", "usecase", "planmode", "creatorloop", "creatormatrix"}
+MOCKUP_KINDS = {"hook", "anatomy", "catalog", "demo", "codedemo", "proscons", "usecase", "planmode", "creatorloop", "creatormatrix", "coworkcode"}
 KINDS = json.loads(subprocess.check_output(["node", "-e", "console.log(JSON.stringify(require('./content').SLIDES.map(s => s.kind)))"], cwd=Path(__file__).parent))
 errors = []
 

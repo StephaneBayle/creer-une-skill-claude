@@ -1,6 +1,6 @@
 # Créer une skill dans Claude
 
-Supports d'une séance d'environ 55 minutes pour un public **non développeur**, suivie d'un atelier :
+Supports d’une séance d’environ 55 à 60 minutes pour un public **non développeur**, suivie d'un atelier :
 qu'est-ce qu'une skill, projet ou skill, où les trouver, **Chat, Cowork ou Code** (avec le **mode plan**),
 comment en créer une, comment la partager, puis un quiz avec la salle.
 
@@ -11,7 +11,7 @@ Auteur : **Stéphane Bayle** · stephane.bayle@gmail.com ·
 
 | Fichier | Pour quoi faire |
 |---|---|
-| [`skills-claude-presentation.pptx`](skills-claude-presentation.pptx) | La présentation (52 diapos, 16:9), notes du présentateur incluses dans chaque diapo |
+| [`skills-claude-presentation.pptx`](skills-claude-presentation.pptx) | La présentation (53 diapos, 16:9), notes du présentateur incluses dans chaque diapo |
 | [`skills-claude-notes-presentateur.pdf`](skills-claude-notes-presentateur.pdf) | Le document à distribuer : notes diapo par diapo, glossaire, fiches pas-à-pas, corrigé du quiz, atelier |
 | [`skills-claude-notes-presentateur.docx`](skills-claude-notes-presentateur.docx) | La même chose en Word, pour l'adapter |
 | [`cartons-quiz-ABCD.pdf`](cartons-quiz-ABCD.pdf) | 4 cartons A4 (A, B, C, D) à imprimer en couleur pour le quiz |

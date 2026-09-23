@@ -362,7 +362,25 @@ const SLIDES = [
       objectif: "Montrer que skill-creator est plus complète dans Cowork et Code, et en faire un argument pour oser Code.",
       script: "skill-creator s'adapte à l'endroit où elle tourne, et ses propres instructions le disent. Dans Chat, elle fait l'essentiel : l'entretien, la rédaction, et des tests qu'elle exécute elle-même, un par un. En revanche, elle n'y compare pas les résultats avec et sans la skill, elle présente les résultats dans la conversation, et elle ne peut pas affiner automatiquement la description, qui demande l'outil en ligne de commande de Claude Code. Dans Cowork et dans Claude Code, elle peut lancer les tests en parallèle, les comparer à une version sans skill, vous ouvrir une page de résultats à relire et commenter, et optimiser la description sur une vingtaine de demandes. Conclusion pratique : pour une première skill simple, Chat suffit. Pour une skill qui compte, que toute une équipe va utiliser, passez par Cowork ou Code : vous aurez la version complète de la méthode. Dans Claude Code, si skill-creator n'est pas déjà disponible via votre compte, on l'installe avec le plugin d'exemples du dépôt anthropics/skills (commandes dans la fiche B8).",
       question: "",
-      transition: "Voyons-la à l'œuvre.",
+      transition: "Entre Cowork et Code, justement : pour une skill, où est la différence ?",
+    },
+  },
+  {
+    kind: "coworkcode", sec: "s5", time: 120,
+    title: "Cowork ou Code pour créer une skill ?",
+    rows: [
+      ["La skill vit…", "dans votre compte Claude", "dans un dossier .claude/skills/"],
+      ["Pour l'enregistrer", "fichier .skill, « Save skill »", "rien à importer"],
+      ["Elle est disponible", "partout : Chat, Cowork, Code", "dans Claude Code seulement"],
+      ["En plus", "—", "paramètres, commandes, mode plan"],
+      ["Partage en équipe", "Publier dans l'organisation", "le dépôt Git du projet"],
+    ],
+    bottom: "Le meilleur des deux : créer et tester dans Code, puis importer le .skill dans le compte.",
+    notes: {
+      objectif: "Distinguer Cowork et Code pour la création de skills : où vit la skill, ce que chacun permet, comment on partage.",
+      script: "Cowork et Code savent tous deux créer une skill avec la méthode complète de skill-creator. La vraie différence, c'est l'endroit où la skill vit. Dans Cowork, elle vit dans votre compte Claude : skill-creator vous remet un fichier .skill, vous cliquez sur « Save skill », et elle est disponible partout où vous êtes connecté, dans Chat, dans Cowork et même dans Claude Code. Dans Code, la skill est un simple dossier, rangé dans .claude/skills du projet ou dans votre dossier personnel : rien à importer, elle marche tout de suite, mais seulement dans Claude Code. La synchronisation va du compte vers Code, jamais dans l'autre sens : pour l'avoir aussi dans Cowork, on compresse le dossier et on l'importe dans le compte. Deuxième différence : Code sait faire des choses que Cowork ne sait pas. Une skill écrite pour Code peut recevoir des paramètres (par exemple /compte-rendu réunion-du-12), lancer une commande pour récupérer des données fraîches avant de démarrer, ou être réservée à un lancement manuel, pour une action sensible. On y a aussi le mode plan, l'historique des versions et la relecture de chaque modification. Troisième différence, le partage : dans Cowork, on publie la skill dans l'organisation (offres Team et Enterprise) ; dans Code, on la range dans le dépôt Git du projet, et toute l'équipe l'obtient avec le projet. Un détail pratique pour la relecture des tests : dans Cowork, skill-creator produit une page de résultats à ouvrir soi-même ; dans Code, elle s'ouvre directement. En pratique : une skill métier pour tous, utilisée dans l'interface de Claude, c'est Cowork. Une skill qu'on veut versionner, faire relire ou partager avec une équipe technique, c'est Code. Et le meilleur des deux mondes : créer et tester dans Code, puis importer le fichier .skill dans le compte pour que tout le monde en profite. Réserve à mentionner : Cowork fusionne en ce moment avec Chat, l'interface peut évoluer.",
+      question: "Pour la skill que vous avez en tête : qui doit l'utiliser, et où ? Cela vous dit déjà quelle porte choisir.",
+      transition: "Voyons maintenant skill-creator à l'œuvre.",
     },
   },
   {

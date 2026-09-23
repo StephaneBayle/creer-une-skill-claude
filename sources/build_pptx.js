@@ -547,6 +547,27 @@ L.creatormatrix = async (s, d) => {
   T(s, "D'après les instructions de skill-creator pour Chat, Cowork et Claude Code.", { x: x0, y: 6.35, w: 12, h: 0.45, fontSize: 16, italic: true, color: C.muted, valign: "middle" });
 };
 
+L.coworkcode = async (s, d) => {
+  title(s, d.title);
+  // deux colonnes contrastées : Cowork sur fond bleu pâle, Code sur fond encre
+  const x0 = 0.6, lw = 3.1, cw = 4.55, y0 = 1.75, rh = 0.72;
+  s.addShape("roundRect", { x: x0 + lw, y: y0, w: cw, h: 0.7 + d.rows.length * rh + 0.1, rectRadius: 0.15, fill: { color: C.blueTint }, line: { type: "none" } });
+  s.addShape("roundRect", { x: x0 + lw + cw + 0.1, y: y0, w: cw, h: 0.7 + d.rows.length * rh + 0.1, rectRadius: 0.15, fill: { color: C.ink }, line: { type: "none" } });
+  s.addImage({ data: await icon("FaLaptopFile", C.blue), x: x0 + lw + 0.3, y: y0 + 0.15, w: 0.4, h: 0.4 });
+  T(s, "Cowork", { x: x0 + lw + 0.85, y: y0 + 0.05, w: 3, h: 0.6, fontSize: 24, bold: true, color: C.blue, valign: "middle" });
+  s.addImage({ data: await icon("FaTerminal", C.white), x: x0 + lw + cw + 0.4, y: y0 + 0.15, w: 0.4, h: 0.4 });
+  T(s, "Code", { x: x0 + lw + cw + 0.95, y: y0 + 0.05, w: 3, h: 0.6, fontSize: 24, bold: true, color: C.white, valign: "middle" });
+  for (let r = 0; r < d.rows.length; r++) {
+    const [lab, a, b] = d.rows[r], y = y0 + 0.7 + r * rh;
+    T(s, lab, { x: x0, y, w: lw - 0.15, h: rh, fontSize: 19, bold: true, color: C.muted, valign: "middle" });
+    T(s, a, { x: x0 + lw + 0.3, y, w: cw - 0.5, h: rh, fontSize: 19, color: C.ink, valign: "middle", fit: "shrink" });
+    T(s, b, { x: x0 + lw + cw + 0.4, y, w: cw - 0.5, h: rh, fontSize: 19, color: C.white, valign: "middle", fit: "shrink" });
+    if (r < d.rows.length - 1) s.addShape("line", { x: x0, y: y + rh, w: lw - 0.2, h: 0, line: { color: C.line, width: 1 } });
+  }
+  s.addImage({ data: await icon("FaArrowsRotate", C.accent), x: x0, y: 6.4, w: 0.36, h: 0.36 });
+  T(s, d.bottom, { x: x0 + 0.5, y: 6.3, w: 11.8, h: 0.55, fontSize: 19, bold: true, color: C.accent, valign: "middle" });
+};
+
 L.demo = async (s, d) => {
   title(s, d.title);
   const X = 0.8, Y = 2.0;
