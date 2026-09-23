@@ -637,6 +637,7 @@ L.contact = async (s, d) => {
   T(s, "Tous les supports", { x: 7.6, y: 4.55, w: 4.9, h: 0.6, fontSize: 28, bold: true, color: C.ink, align: "center", valign: "middle" });
   T(s, "github.com/StephaneBayle/\ncreer-une-skill-claude", { x: 7.6, y: 5.15, w: 4.9, h: 0.9, fontSize: 20, bold: true, color: C.accent, align: "center", valign: "middle" });
   T(s, "présentation · notes · cartons · sources", { x: 7.6, y: 6.1, w: 4.9, h: 0.5, fontSize: 16, color: C.muted, align: "center", valign: "middle" });
+  T(s, "Licence CC BY 4.0 · scripts sous MIT", { x: 7.3, y: 6.95, w: 5.5, h: 0.4, fontSize: 14, color: C.darkMuted, align: "center", valign: "middle" });
 };
 
 async function main() {

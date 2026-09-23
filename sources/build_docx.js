@@ -78,6 +78,7 @@ children.push(
   p([link("github.com/StephaneBayle", AUTHOR.github)]),
   new Paragraph({ style: "Body", spacing: { before: 400, after: 80 }, children: [r("Tous les supports de la séance", { bold: true, color: ACCENT })] }),
   p([link("github.com/StephaneBayle/creer-une-skill-claude", REPO)]),
+  p([r("Supports sous licence Creative Commons Attribution 4.0 (CC BY 4.0) : réutilisation et adaptation libres en citant l'auteur et le lien du dépôt. Scripts de génération sous licence MIT.", { color: MUTED, size: 18 })], { spacing: { before: 200 } }),
   new Paragraph({ style: "Body", children: [new PageBreak()] }),
 );
 
