@@ -91,7 +91,7 @@ const SLIDES = [
     subtitle: "Créer, trouver et partager une skill",
     notes: {
       objectif: "Accueillir, poser le cadre et annoncer la promesse de la séance.",
-      script: "Bonjour à toutes et à tous. Pendant trente minutes, on va parler d'une fonction de Claude qui change la façon de travailler avec lui : les skills, qu'on peut traduire par « compétences ». Pas besoin de savoir coder : si vous savez expliquer une tâche à un nouveau collègue, vous savez créer une skill. Le déroulé : d'abord comprendre ce que c'est, ensuite voir où en trouver, puis comment en créer et en partager une. On finit par un petit quiz où vous répondrez à voix haute, et juste après, vous passez à la pratique sur vos propres cas.",
+      script: "Bonjour à toutes et à tous. Pendant une petite heure, on va parler d'une fonction de Claude qui change la façon de travailler avec lui : les skills, qu'on peut traduire par « compétences ». Pas besoin de savoir coder : si vous savez expliquer une tâche à un nouveau collègue, vous savez créer une skill. Le déroulé : d'abord comprendre ce que c'est, ensuite voir où en trouver, puis choisir où la créer (Chat, Cowork ou Code, avec le mode plan pour ne rien casser), la créer avec skill-creator, la skill d'Anthropic qui fabrique les skills, et enfin la partager. On finit par un petit quiz où vous répondrez à voix haute, et juste après, vous passez à la pratique sur vos propres cas.",
       question: "À main levée : qui utilise Claude au moins une fois par semaine ?",
       transition: "Je commence par une question qui fâche un peu…",
     },
@@ -320,7 +320,7 @@ const SLIDES = [
       objectif: "Donner une méthode simple, réutilisable pendant l'atelier.",
       script: "Un : repérer une tâche qui revient au moins une fois par semaine et qui se fait toujours de la même façon. Deux : la décrire à Claude comme à un nouveau collègue, avec si possible un exemple réussi (un ancien compte rendu, un mail type). Trois : laisser Claude générer la skill. Il s'appuie pour cela sur skill-creator, la skill d'Anthropic qui fabrique les skills : elle lui fait poser les bonnes questions, puis rédiger un SKILL.md conforme aux bonnes pratiques. Répondez-lui franchement. Quatre : tester, dans une nouvelle conversation, avec une demande naturelle, sans nommer la skill. Préparez trois demandes : deux qui doivent déclencher la skill, et une qui ne doit pas (par exemple « résume cet article » pour une skill de compte rendu). La mention « Using… » dans la réflexion de Claude indique si la skill a servi. Choisissez des demandes réalistes et un peu substantielles : Claude ne consulte pas une skill pour une tâche qu'il sait faire seul en une étape (« lis ce fichier »), même si la description correspond. Comparez aussi avec le résultat obtenu sans la skill : c'est ce qui prouve qu'elle apporte quelque chose. Anthropic résume la méthode ainsi : on conçoit avec un premier Claude, on teste avec un second dans une conversation neuve, et on rapporte au premier ce qu'on a observé. Cinq : ajuster. Si elle ne se déclenche pas, c'est presque toujours la description qu'il faut revoir. Si le résultat n'est pas bon, ce sont les instructions ou l'exemple. On boucle entre quatre et cinq deux ou trois fois : c'est normal.",
       question: "",
-      transition: "Je vous montre à quoi ça ressemble en vrai.",
+      transition: "L'étape 3, concrètement, qui la fait ? Une skill : skill-creator.",
     },
   },
   {
