@@ -22,4 +22,5 @@ node build_docx.js
 ROOT="${0:A:h}/.."
 ./export_pdf.sh pages "$ROOT/skills-claude-notes-presentateur.docx" "$ROOT/skills-claude-notes-presentateur.pdf"
 "$PY" postprocess.py pdf
+node build_banner.js
 "$PY" check.py
