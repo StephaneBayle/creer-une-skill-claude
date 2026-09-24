@@ -122,15 +122,34 @@ L.cards = async (s, d) => {
     T(s, rest[i], { x: tx + 0.12, y: y - 0.38, w: 2.1, h: 0.4, fontSize: 16, bold: true, color: C.muted, valign: "middle" });
     s.addShape("roundRect", { x, y, w: 4.6, h: 2.1, rectRadius: 0.12, fill: { color: C.soft }, line: { color: C.line, width: 1 } });
   }
-  // fiche sortie
-  const xx = 6.8, yy = 2.35;
-  s.addShape("roundRect", { x: xx + 0.3, y: yy - 0.38, w: 2.6, h: 0.5, rectRadius: 0.1, fill: { color: C.accent }, line: { type: "none" } });
-  T(s, d.cards[d.pick], { x: xx + 0.42, y: yy - 0.38, w: 2.4, h: 0.4, fontSize: 16, bold: true, color: C.white, valign: "middle" });
-  s.addShape("roundRect", { x: xx, y: yy, w: 5.4, h: 3.3, rectRadius: 0.12, fill: { color: C.white }, line: { color: C.accent, width: 2.5 }, shadow: { type: "outer", blur: 8, offset: 3, angle: 90, color: C.shadow, opacity: 0.18 } });
-  s.addImage({ data: await icon("FaFileLines", C.accent), x: xx + 0.35, y: yy + 0.35, w: 0.6, h: 0.6 });
-  T(s, d.cards[d.pick], { x: xx + 1.15, y: yy + 0.35, w: 4, h: 0.6, fontSize: 26, bold: true, valign: "middle" });
-  [3.9, 3.2, 4.2, 2.6].forEach((w, k) => s.addShape("roundRect", { x: xx + 0.4, y: yy + 1.35 + k * 0.42, w, h: 0.16, rectRadius: 0.08, fill: { color: C.bar }, line: { type: "none" } }));
-  s.addImage({ data: await icon("FaArrowRight", C.accent), x: 6.0, y: 3.7, w: 0.6, h: 0.6 });
+  // fiche sortie, annotée des trois niveaux de lecture
+  const xx = 6.45, yy = 2.35, cw = 4.0;
+  s.addShape("roundRect", { x: xx + 0.25, y: yy - 0.38, w: 2.6, h: 0.5, rectRadius: 0.1, fill: { color: C.accent }, line: { type: "none" } });
+  T(s, "compte-rendu", { x: xx + 0.37, y: yy - 0.38, w: 2.4, h: 0.4, fontSize: 16, bold: true, fontFace: MONO, color: C.white, valign: "middle" });
+  s.addShape("roundRect", { x: xx, y: yy, w: cw, h: 3.5, rectRadius: 0.12, fill: { color: C.white }, line: { color: C.accent, width: 2.5 }, shadow: { type: "outer", blur: 8, offset: 3, angle: 90, color: C.shadow, opacity: 0.18 } });
+  // niveau 1 : description
+  s.addShape("roundRect", { x: xx + 0.2, y: yy + 0.2, w: cw - 0.4, h: 0.75, rectRadius: 0.08, fill: { color: C.accentTint }, line: { type: "none" } });
+  T(s, "« Utiliser quand… »", { x: xx + 0.35, y: yy + 0.2, w: cw - 0.7, h: 0.75, fontSize: 20, italic: true, color: C.accent, valign: "middle" });
+  // niveau 2 : méthode
+  [3.2, 2.6, 3.4, 2.1].forEach((w, k) => s.addShape("roundRect", { x: xx + 0.3, y: yy + 1.2 + k * 0.32, w, h: 0.14, rectRadius: 0.07, fill: { color: C.bar }, line: { type: "none" } }));
+  // niveau 3 : annexes
+  const chips = [["cr.docx", 1.45], ["exemple.md", 1.95]];
+  let cx = xx + 0.2;
+  for (const [name, cwid] of chips) {
+    s.addShape("roundRect", { x: cx, y: yy + 2.65, w: cwid, h: 0.55, rectRadius: 0.08, fill: { color: C.soft }, line: { color: C.line, width: 1 } });
+    s.addImage({ data: await icon("FaPaperclip", C.muted), x: cx + 0.1, y: yy + 2.8, w: 0.25, h: 0.25 });
+    T(s, name, { x: cx + 0.4, y: yy + 2.65, w: cwid - 0.45, h: 0.55, fontSize: 16, fontFace: MONO, color: C.ink, valign: "middle" });
+    cx += cwid + 0.12;
+  }
+  // étiquettes des niveaux, alignées sur chaque zone
+  const ly = [yy + 0.2, yy + 1.15, yy + 2.6];
+  for (let k = 0; k < d.levels.length; k++) {
+    const [num, a, b] = d.levels[k];
+    s.addShape("line", { x: xx + cw + 0.05, y: ly[k] + 0.35, w: 0.35, h: 0, line: { color: k === 0 ? C.accent : C.barStrong, width: 1.5 } });
+    T(s, [{ text: `${num} · ${a}`, options: { bold: true, color: k === 0 ? C.accent : C.ink, breakLine: true } }, { text: b, options: { color: C.muted, fontSize: 16 } }],
+      { x: xx + cw + 0.5, y: ly[k], w: 2.3, h: 0.75, fontSize: 18, valign: "middle" });
+  }
+  s.addImage({ data: await icon("FaArrowRight", C.accent), x: 5.75, y: 3.7, w: 0.6, h: 0.6 });
   T(s, d.caption, { x: 0.5, y: 6.3, w: W - 1, h: 0.6, fontSize: 26, italic: true, color: C.muted, align: "center" });
 };
 
