@@ -16,7 +16,6 @@ Auteur : **Stéphane Bayle** · stephane.bayle@gmail.com ·
 | [`skills-claude-presentation.pptx`](skills-claude-presentation.pptx) | La présentation (52 diapos, 16:9), notes du présentateur incluses dans chaque diapo |
 | [`skills-claude-notes-presentateur.pdf`](skills-claude-notes-presentateur.pdf) | Le document à distribuer : notes diapo par diapo, glossaire, fiches pas-à-pas, corrigé du quiz, atelier |
 | [`skills-claude-notes-presentateur.docx`](skills-claude-notes-presentateur.docx) | La même chose en Word, pour l'adapter |
-| [`exemples/`](exemples/) | Une skill d'exemple complète, **analyse-pestel**, à lire, importer et tester pendant l'atelier |
 
 Pour l'atelier, commencez par les **fiches B4** (créer une skill dans Chat ou Cowork), **B7**
 (créer une skill avec Claude Code, sans terminal) et **B8** (skill-creator, la skill d'Anthropic qui fabrique
