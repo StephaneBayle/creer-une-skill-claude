@@ -1,5 +1,5 @@
 #!/bin/zsh
-# Régénère tous les livrables : pptx, vignettes, docx + PDF, cartons, contrôles.
+# Régénère tous les livrables : pptx, vignettes, docx + PDF, contrôles.
 # Les dépendances vivent hors de Documents (lectures de fichiers très lentes dans ce dossier).
 # Nécessite Keynote et Pages (« Creator Studio ») pour les conversions en PDF.
 set -e
@@ -22,5 +22,4 @@ node build_docx.js
 ROOT="${0:A:h}/.."
 ./export_pdf.sh pages "$ROOT/skills-claude-notes-presentateur.docx" "$ROOT/skills-claude-notes-presentateur.pdf"
 "$PY" postprocess.py pdf
-"$PY" build_cartons.py
 "$PY" check.py

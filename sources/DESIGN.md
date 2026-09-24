@@ -1,6 +1,6 @@
 # Charte : présentation « Créer une skill dans Claude »
 
-Source des valeurs : `tokens.json`, lu par `build_pptx.js`, `build_docx.js`, `build_cartons.py` et `check.py`.
+Source des valeurs : `tokens.json`, lu par `build_pptx.js`, `build_docx.js` et `check.py`.
 Ne jamais écrire une couleur en dur dans un générateur : ajouter un jeton, puis l'utiliser.
 
 ## Scène
@@ -13,7 +13,7 @@ Stratégie « engagée » : une couleur signature (framboise `accent`, B8235A) p
 et en touches ailleurs. Elle a été choisie pour ne pas évoquer l'orange de Claude/Anthropic.
 - Neutres froids légèrement teintés vers l'encre (`soft` F1F3F6, `line`, `bar`) ; pas de fond crème.
 - Chaque couleur a un usage **aplat** et un usage **texte** : sur fond sombre, le texte framboise passe en `accentOnDark`.
-- Portes : Chat = `accent`, Cowork = `blue`, Code = `ink`. Cartons du quiz : `A` rouge, `B` bleu, `C` vert, `D` jaune (texte `ink`).
+- Portes : Chat = `accent`, Cowork = `blue`, Code = `ink`. Lettres de réponse du quiz : `A` rouge, `B` bleu, `C` vert, `D` jaune (texte `ink`).
 - Tout texte ≥ 4,5:1 : les paires sont listées dans `tokens.json › textPairs` et vérifiées par `check.py`.
 
 ## Typographie

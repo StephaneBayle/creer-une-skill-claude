@@ -377,51 +377,9 @@ L.planmode = async (s, d) => {
   T(s, "Aucun fichier modifié", { x: zx + 0.65, y: 4.45, w: zw - 0.8, h: 0.5, fontSize: 18, bold: true, color: C.blue, valign: "middle" });
   T(s, "Pour l'activer :", { x: 0.8, y: 5.6, w: 2.6, h: 0.6, fontSize: 20, bold: true, color: C.muted, valign: "middle" });
   for (let k = 0; k < d.keys.length; k++) {
-    const x = 3.4 + k * 3.1;
-    s.addShape("roundRect", { x, y: 5.6, w: 2.8, h: 0.6, rectRadius: 0.1, fill: { color: C.white }, line: { color: C.ink, width: 1.5 }, shadow: { type: "outer", blur: 0, offset: 3, angle: 90, color: C.ink, opacity: 0.9 } });
-    T(s, d.keys[k], { x, y: 5.6, w: 2.8, h: 0.6, fontSize: 20, bold: true, align: "center", valign: "middle", fontFace: k === 1 ? MONO : FONT });
-  }
-};
-
-L.codedemo = async (s, d) => {
-  title(s, d.title);
-  const X = 0.6, Y = 1.95, WW = 9.0, HH = 5.0;
-  s.addShape("roundRect", { x: X, y: Y, w: WW, h: HH, rectRadius: 0.12, fill: { color: C.white }, line: { color: C.line, width: 1.5 }, shadow: { type: "outer", blur: 10, offset: 3, angle: 90, color: C.shadow, opacity: 0.12 } });
-  // arborescence
-  s.addShape("rect", { x: X, y: Y + 0.12, w: 3.4, h: HH - 0.24, fill: { color: C.soft }, line: { type: "none" } });
-  const tree = [["FaFolderOpen", "charte/", C.ink, true], ["FaFilePdf", "charte.pdf", C.muted], ["FaFileImage", "logo.png", C.muted], ["FaFilePowerpoint", "exemple.pptx", C.muted], ["FaFolderPlus", ".claude/skills/", C.green, true], ["FaFileLines", "charte-graphique", C.green]];
-  for (let i = 0; i < tree.length; i++) {
-    const [ic, name, col, bold] = tree[i], y = Y + 0.35 + i * 0.55, ind = (i === 0 || i === 4) ? 0 : 0.3;
-    s.addImage({ data: await icon(ic, col), x: X + 0.25 + ind, y: y + 0.08, w: 0.28, h: 0.28 });
-    T(s, name, { x: X + 0.65 + ind, y, w: 2.7 - ind, h: 0.45, fontSize: 16, bold: !!bold, color: col, valign: "middle", fontFace: MONO });
-  }
-  s.addShape("roundRect", { x: X + 0.15, y: Y + 3.7, w: 3.1, h: 0.5, rectRadius: 0.22, fill: { color: C.greenTint }, line: { type: "none" } });
-  T(s, "créé à l'étape 4", { x: X + 0.15, y: Y + 3.7, w: 3.1, h: 0.5, fontSize: 16, italic: true, color: C.green, align: "center", valign: "middle" });
-  // zone principale
-  const mx = X + 3.6, mw = WW - 3.85;
-  s.addShape("roundRect", { x: mx + mw - 2.1, y: Y + 0.25, w: 2.0, h: 0.42, rectRadius: 0.21, fill: { color: C.blueTint }, line: { type: "none" } });
-  s.addImage({ data: await icon("FaPause", C.blue), x: mx + mw - 1.95, y: Y + 0.34, w: 0.24, h: 0.24 });
-  T(s, "Mode plan", { x: mx + mw - 1.6, y: Y + 0.25, w: 1.5, h: 0.42, fontSize: 16, bold: true, color: C.blue, valign: "middle" });
-  s.addShape("roundRect", { x: mx, y: Y + 0.85, w: mw, h: 0.85, rectRadius: 0.15, fill: { color: C.soft }, line: { type: "none" } });
-  T(s, "Crée une skill charte-graphique à partir des fichiers de ce dossier.", { x: mx + 0.2, y: Y + 0.85, w: mw - 0.4, h: 0.85, fontSize: 16, valign: "middle" });
-  s.addShape("roundRect", { x: mx, y: Y + 1.9, w: mw, h: 2.3, rectRadius: 0.12, fill: { color: C.white }, line: { color: C.blue, width: 1.5 } });
-  T(s, [
-    { text: "Plan proposé", options: { bold: true, color: C.blue, breakLine: true } },
-    { text: "Lire charte.pdf et exemple.pptx", options: { bullet: { type: "number" }, breakLine: true } },
-    { text: "Créer charte-graphique/SKILL.md", options: { bullet: { type: "number" }, breakLine: true } },
-    { text: "Ajouter couleurs-typo.md", options: { bullet: { type: "number" }, breakLine: true } },
-    { text: "Tester sur une diapo", options: { bullet: { type: "number" } } },
-  ], { x: mx + 0.2, y: Y + 2.0, w: mw - 0.4, h: 2.1, fontSize: 16, paraSpaceAfter: 3 });
-  s.addShape("roundRect", { x: mx, y: Y + 4.35, w: 1.9, h: 0.48, rectRadius: 0.24, fill: { color: C.green }, line: { type: "none" } });
-  T(s, "Approuver", { x: mx, y: Y + 4.35, w: 1.9, h: 0.48, fontSize: 16, bold: true, color: C.white, align: "center", valign: "middle" });
-  s.addShape("roundRect", { x: mx + 2.05, y: Y + 4.35, w: 3.0, h: 0.48, rectRadius: 0.24, fill: { color: C.white }, line: { color: C.muted, width: 1 } });
-  T(s, "Continuer à planifier", { x: mx + 2.05, y: Y + 4.35, w: 3.0, h: 0.48, fontSize: 16, bold: true, color: C.muted, align: "center", valign: "middle" });
-  // étapes
-  const steps = ["J'ouvre le dossier", "Mode plan + demande", "Je relis le plan", "J'approuve, je teste"];
-  for (let i = 0; i < 4; i++) {
-    const y = Y + 0.4 + i * 1.1;
-    await badge(s, i + 1, 9.9, y);
-    T(s, steps[i], { x: 10.6, y: y - 0.1, w: 2.3, h: 0.75, fontSize: 18, bold: true, valign: "middle" });
+    const x = 3.4 + k * 3.6;
+    s.addShape("roundRect", { x, y: 5.6, w: 3.3, h: 0.6, rectRadius: 0.1, fill: { color: C.white }, line: { color: C.ink, width: 1.5 }, shadow: { type: "outer", blur: 0, offset: 3, angle: 90, color: C.ink, opacity: 0.9 } });
+    T(s, d.keys[k], { x, y: 5.6, w: 3.3, h: 0.6, fontSize: 20, bold: true, align: "center", valign: "middle", fontFace: d.keys[k].startsWith("/") ? MONO : FONT });
   }
 };
 
@@ -640,9 +598,9 @@ function letterBox(s, k, x, y, size) {
 L.quizrules = async (s, d) => {
   s.background = { color: C.ink };
   T(s, d.title, { objectName: "TITLE", x: 0.5, y: 1.0, w: W - 1, h: 1.0, fontSize: 48, bold: true, color: C.white, align: "center", valign: "middle" });
-  for (let k = 0; k < 4; k++) letterBox(s, k, 1.9 + k * 2.55, 2.6, 2.0);
-  T(s, `${QUIZ.length} questions · « 1, 2, 3, cartons ! »`, { x: 0.5, y: 5.1, w: W - 1, h: 0.6, fontSize: 26, color: C.darkSub, align: "center" });
-  T(s, "Pas de carton ? 1 à 4 doigts.", { x: 0.5, y: 5.75, w: W - 1, h: 0.5, fontSize: 20, italic: true, color: C.darkMuted, align: "center" });
+  s.addImage({ data: await icon("FaComments", C.accentOnDark), x: W / 2 - 0.9, y: 2.45, w: 1.8, h: 1.8 });
+  T(s, `${QUIZ.length} questions · réponse à voix haute`, { x: 0.5, y: 4.6, w: W - 1, h: 0.6, fontSize: 28, color: C.darkSub, align: "center" });
+  T(s, "Dites simplement la lettre : « B ! »", { x: 0.5, y: 5.3, w: W - 1, h: 0.5, fontSize: 22, italic: true, color: C.darkMuted, align: "center" });
 };
 
 async function quizSlide(s, d, reveal) {
@@ -705,7 +663,7 @@ L.contact = async (s, d) => {
   s.addImage({ data: await qr(REPO), x: 8.35, y: 0.95, w: 3.4, h: 3.4, altText: `QR code vers le dépôt GitHub des supports de la séance (${REPO})` });
   T(s, "Tous les supports", { x: 7.6, y: 4.55, w: 4.9, h: 0.6, fontSize: 28, bold: true, color: C.ink, align: "center", valign: "middle" });
   T(s, "github.com/StephaneBayle/\ncreer-une-skill-claude", { x: 7.6, y: 5.15, w: 4.9, h: 0.9, fontSize: 20, bold: true, color: C.accent, align: "center", valign: "middle" });
-  T(s, "présentation · notes · cartons · sources", { x: 7.6, y: 6.1, w: 4.9, h: 0.5, fontSize: 16, color: C.muted, align: "center", valign: "middle" });
+  T(s, "présentation · notes · sources", { x: 7.6, y: 6.1, w: 4.9, h: 0.5, fontSize: 16, color: C.muted, align: "center", valign: "middle" });
   T(s, "Licence CC BY 4.0 · scripts sous MIT", { x: 7.3, y: 6.95, w: 5.5, h: 0.4, fontSize: 14, color: C.darkMuted, align: "center", valign: "middle" });
 };
 

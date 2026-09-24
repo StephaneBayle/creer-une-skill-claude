@@ -131,9 +131,7 @@ children.push(
   bullet([r("la question à poser à la salle", { bold: true }), r(" et la transition vers la diapo suivante.")]),
   p("En annexe : un glossaire, des fiches pas-à-pas, le corrigé du quiz, la consigne de l'atelier et les liens officiels."),
   h2("Matériel"),
-  bullet(`Vidéoprojecteur, accès à Claude sur le poste du présentateur (démo de la diapo ${slideNo("demo")}), et l'onglet Code de l'application de bureau connecté au même compte (démo de la diapo ${slideNo("codedemo")}).`),
-  bullet("Un dossier « charte » de démonstration (une charte en PDF, un logo, une présentation d'exemple), copié à part pour la démo Code."),
-  bullet("Un jeu de 4 cartons A/B/C/D par participant (fichier cartons-quiz-ABCD.pdf, 4 pages A4 à imprimer en couleur, à découper ou non)."),
+  bullet(`Vidéoprojecteur et accès à Claude sur le poste du présentateur (démo de la diapo ${slideNo("demo")}).`),
   bullet("Un tableau ou paperboard pour noter les idées de skills récoltées à la diapo 2."),
   h2("Déroulé minuté"),
 );
@@ -141,7 +139,7 @@ let cum = 0;
 const rows = [["N°", "Diapo", "Durée", "Cumul"]];
 SLIDES.forEach((s, i) => { cum += s.time; rows.push([i + 1, s.title, fmt(s.time), s.time ? fmt(cum) : "—"]); });
 children.push(table([700, 6138, 1400, 1400], rows));
-children.push(p([r(`Si vous prenez du retard, raccourcissez la diapo ${slideNo("which")} (ne traiter que deux cartes), la démo de la diapo ${slideNo("demo")} (s'arrêter à l'enregistrement de la skill) et la diapo ${slideNo("threedoors")} (la survoler). Ne sacrifiez pas la démo Code (diapo ${slideNo("codedemo")}) : c'est elle qui lève les peurs.`, { italics: true, color: MUTED })], { spacing: { before: 160 } }));
+children.push(p([r(`Si vous prenez du retard, raccourcissez la diapo ${slideNo("which")} (ne traiter que deux cartes), la démo de la diapo ${slideNo("demo")} (s'arrêter à l'enregistrement de la skill) et la diapo ${slideNo("threedoors")} (la survoler). Ne sacrifiez pas les diapos sur Code et le mode plan (${slideNo("myths")} et ${slideNo("planmode")}) : ce sont elles qui lèvent les peurs.`, { italics: true, color: MUTED })], { spacing: { before: 160 } }));
 
 // Fiches par diapo
 children.push(new Paragraph({ style: "Body", children: [new PageBreak()] }), h1("Notes diapo par diapo"));
@@ -168,7 +166,7 @@ children.push(table([2400, 7238], [
   ["Markdown (.md)", "Un format de texte très simple : # pour un titre, - pour une liste. Aucun code à apprendre."],
   ["Projet", "Un espace de Claude consacré à un sujet : documents de référence et consignes partagés par toutes ses conversations."],
   ["Chat", "La conversation classique avec Claude, sur le web ou dans l'application."],
-  ["Cowork", "Le mode où Claude travaille dans vos dossiers et fichiers pour mener une tâche de bout en bout. En cours de fusion avec Chat en un seul « Claude »."],
+  ["Cowork", "Le mode où Claude travaille dans vos dossiers et fichiers pour mener une tâche de bout en bout. Chat et Cowork ont fusionné : c'est désormais un seul Claude."],
   ["Claude Code", "Claude qui travaille dans un dossier de votre ordinateur, avec plus de contrôle. Disponible dans un onglet de l'application de bureau ; aucun code à écrire."],
   ["skill-creator", "La skill d'Anthropic qui fabrique les skills : entretien, rédaction du SKILL.md, tests, amélioration, affinage de la description et empaquetage. Claude l'utilise dès que vous lui demandez de créer une skill."],
   ["Mode plan", "Mode de Claude Code où Claude lit et propose un plan sans rien modifier, puis attend votre accord."],
@@ -238,7 +236,7 @@ children.push(h2("B7. Créer une skill avec Claude Code, sans terminal"));
 children.push(p([r("Première fois ? Travaillez sur une ", {}), r("copie", { bold: true }), r(" de votre dossier : vous ne risquez rien.")]));
 children.push(num("Ouvrir l'application Claude sur ordinateur, onglet Code, et choisir le dossier de travail (par exemple un dossier « charte » contenant la charte en PDF et un exemple réussi).", "b7"));
 children.push(num("Vérifier le mode de départ : sur Pro, Max et Team, Claude Code démarre en mode auto (il agit sans demander, un second modèle vérifie). Pour une première fois, choisir Manuel ou Plan.", "b7"));
-children.push(num("Passer en mode plan : sélecteur de mode à côté de la zone de message, touches Maj + Tab jusqu'à « mode plan », ou commencer le message par /plan.", "b7"));
+children.push(num("Passer en mode plan : choisir « Plan » dans le sélecteur de mode à côté de la zone de message, ou commencer le message par /plan.", "b7"));
 children.push(num("Écrire la demande (prompt ci-dessous). Claude lit les fichiers mais ne modifie rien.", "b7"));
 children.push(num("Relire le plan proposé. Pour corriger, répondre « continue à planifier » avec vos remarques (« ajoute une section sur le logo »).", "b7"));
 children.push(num("Approuver. Pour une première fois, choisir l'option qui fait valider chaque modification une par une.", "b7"));
@@ -294,7 +292,7 @@ children.push(encadre("Cowork ou Code pour créer une skill ?", [
   [r("Relire les tests de skill-creator. ", { bold: true }), r("Cowork : une page HTML à ouvrir soi-même, les commentaires reviennent sous forme de fichier. Code : la page s'ouvre directement.")],
   [r("Partager en équipe. ", { bold: true }), r("Cowork : Partager ou Publier dans l'organisation (Team/Enterprise). Code : ranger la skill dans le dépôt Git du projet.")],
   [r("En pratique. ", { bold: true }), r("Skill métier pour tous : Cowork. Skill à versionner, relire ou partager avec une équipe technique : Code. Le meilleur des deux : créer et tester dans Code, puis importer le .skill dans le compte.")],
-  [r("Cowork fusionne avec Chat en ce moment : l'interface peut évoluer. Le mode plan n'est documenté que pour Claude Code.", { italics: true, color: MUTED })],
+  [r("Le mode plan n'est documenté que pour Claude Code.", { italics: true, color: MUTED })],
 ]));
 
 // Exemple complet
@@ -369,7 +367,7 @@ children.push(table([7238, 2400], [
 // Liens et points à vérifier
 children.push(new Paragraph({ style: "Body", children: [new PageBreak()] }), h1("Annexe F · Pour aller plus loin"));
 const links = [
-  ["Tous les supports de cette séance (présentation, notes, cartons, sources)", REPO],
+  ["Tous les supports de cette séance (présentation, notes, sources)", REPO],
   ["Utiliser les skills dans Claude (aide officielle)", "https://support.claude.com/en/articles/12512180-use-skills-in-claude"],
   ["Qu'est-ce qu'une skill ?", "https://support.claude.com/en/articles/12512176-what-are-skills"],
   ["Créer une skill personnalisée", "https://support.claude.com/en/articles/12512198-how-to-create-custom-skills"],
@@ -384,18 +382,17 @@ const links = [
   ["Créer une skill en conversation avec Claude (Claude Academy)", "https://academy.claude.com/tutorials/how-to-create-a-skill-with-claude-through-conversation"],
   ["Modes de permission et mode plan (Claude Code)", "https://code.claude.com/docs/en/permission-modes"],
   ["Claude Code dans des dossiers de notes et de documents", "https://code.claude.com/docs/en/common-workflows"],
-  ["Fusion de Cowork et de Chat (annonce)", "https://claude.com/blog/cowork-is-now-claude"],
+  ["Chat et Cowork réunis en un seul Claude (annonce)", "https://claude.com/blog/cowork-is-now-claude"],
 ];
 links.forEach(([t, u]) => children.push(bullet([link(t, u), r("  " + u.replace(/^https:\/\//, ""), { color: MUTED, size: 18 })])));
 children.push(h2("À vérifier le jour J"));
 children.push(bullet("Le libellé exact des menus dans la langue de l'interface (« Personnaliser » / « Customize », « Importer une skill »…) et l'emplacement de la liste des skills : l'aide cite Personnaliser › Skills, le tutoriel Academy Paramètres › Capacités › Skills."));
 children.push(bullet("Que skill-creator est activée sur le poste de démo et ceux des participants, et que le bouton « Save skill » apparaît bien (il dépend des droits de l'organisation)."));
 children.push(bullet("Si le menu d'une skill permet de la télécharger, pour le partage."));
-children.push(bullet("Dans le dossier de démo Code, créer à l'avance le dossier vide .claude/skills/ et régler le mode sur Manuel ou Plan."));
+children.push(bullet("Pour le parcours « Code accompagné » de l'atelier : créer à l'avance le dossier vide .claude/skills/ dans le dossier de travail, et régler le mode sur Manuel ou Plan."));
 children.push(bullet("Que l'option « Exécution de code et création de fichiers » est bien active sur le poste de démo et sur ceux des participants."));
 children.push(bullet("En Team/Enterprise : que l'administrateur a autorisé les skills et le partage, et quel est le réglage de publication (à partir du 2 octobre 2026, « Relecture requise » s’appliquera par défaut aux organisations qui n’ont rien choisi)."));
-children.push(bullet(`Les démos en direct (diapos ${slideNo("demo")} et ${slideNo("codedemo")}) : prévoir les maquettes comme solution de repli si le réseau fait défaut.`));
-children.push(bullet("L'état de la fusion Chat/Cowork selon l'offre des participants : deux onglets ou un seul « Claude » (déploiement commencé en septembre 2026 pour Pro et Max)."));
+children.push(bullet(`La démo en direct (diapo ${slideNo("demo")}) : prévoir la maquette comme solution de repli si le réseau fait défaut.`));
 children.push(bullet("Que l'onglet Code de l'application de bureau est installé et connecté au compte sur le poste de démo, et sur les postes du parcours « Code accompagné »."));
 children.push(bullet("En Team/Enterprise : si l'administrateur a désactivé le mode auto, l'option d'approbation du plan s'intitule « accepter automatiquement les modifications »."));
 children.push(h2("Limites de ce support"));

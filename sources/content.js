@@ -23,7 +23,7 @@ const SECTIONS = {
   end: { label: "Conclusion", icon: "FaFlagCheckered" },
 };
 
-// Couleurs des cartons : A rouge, B bleu, C vert, D jaune.
+// Couleurs des lettres de réponse : A rouge, B bleu, C vert, D jaune.
 const QUIZ = [
   {
     q: "Qu'est-ce qui décide Claude à utiliser une skill ?",
@@ -91,7 +91,7 @@ const SLIDES = [
     subtitle: "Créer, trouver et partager une skill",
     notes: {
       objectif: "Accueillir, poser le cadre et annoncer la promesse de la séance.",
-      script: "Bonjour à toutes et à tous. Pendant trente minutes, on va parler d'une fonction de Claude qui change la façon de travailler avec lui : les skills, qu'on peut traduire par « compétences ». Pas besoin de savoir coder : si vous savez expliquer une tâche à un nouveau collègue, vous savez créer une skill. Le déroulé : d'abord comprendre ce que c'est, ensuite voir où en trouver, puis comment en créer et en partager une. On finit par un petit quiz avec les cartons de couleur posés devant vous, et juste après, vous passez à la pratique sur vos propres cas.",
+      script: "Bonjour à toutes et à tous. Pendant trente minutes, on va parler d'une fonction de Claude qui change la façon de travailler avec lui : les skills, qu'on peut traduire par « compétences ». Pas besoin de savoir coder : si vous savez expliquer une tâche à un nouveau collègue, vous savez créer une skill. Le déroulé : d'abord comprendre ce que c'est, ensuite voir où en trouver, puis comment en créer et en partager une. On finit par un petit quiz où vous répondrez à voix haute, et juste après, vous passez à la pratique sur vos propres cas.",
       question: "À main levée : qui utilise Claude au moins une fois par semaine ?",
       transition: "Je commence par une question qui fâche un peu…",
     },
@@ -119,7 +119,7 @@ const SLIDES = [
     ],
     notes: {
       objectif: "Donner la carte du parcours, un picto par étape.",
-      script: "Six étapes, un picto chacune. Chaque partie s'ouvre sur une diapo colorée avec son numéro et son picto, et le pied de page de chaque diapo rappelle la partie en cours. On termine par le quiz : gardez vos cartons à portée de main.",
+      script: "Six étapes, un picto chacune. Chaque partie s'ouvre sur une diapo colorée avec son numéro et son picto, et le pied de page de chaque diapo rappelle la partie en cours. On termine par un quiz, à l'oral.",
       question: "",
       transition: "Première étape : qu'est-ce qu'une skill, concrètement ?",
     },
@@ -223,7 +223,7 @@ const SLIDES = [
   {
     kind: "doors", sec: "s4", time: 90,
     title: "Chat, Cowork ou Code ?",
-    banner: "Chat et Cowork fusionnent (en cours)",
+    banner: "Chat et Cowork réunis",
     doors: [
       ["FaComments", "Chat", "Je décris, Claude rédige", "Le plus simple"],
       ["FaLaptopFile", "Cowork", "Claude agit sur mes fichiers", "Avec mes fichiers"],
@@ -231,7 +231,7 @@ const SLIDES = [
     ],
     notes: {
       objectif: "Présenter les trois portes d'entrée et annoncer qu'aucune n'est réservée aux experts.",
-      script: "Trois portes, une même skill. Chat, c'est la conversation classique, sur le web ou dans l'application : vous dites « aide-moi à créer une skill », Claude vous interroge, rédige, et vous remet un fichier de skill à enregistrer. Cowork, c'est le mode où Claude travaille dans vos dossiers et produit de vrais fichiers. Petite actualité : Anthropic est en train de fusionner Chat et Cowork en un seul Claude. Selon votre offre, vous verrez encore deux onglets ou un seul (le déploiement a commencé pour Pro et Max, Team et Free suivront, et les administrateurs Enterprise sont prévenus à l'avance). Rien ne se perd : vos skills, projets et connecteurs suivent. Code, enfin, c'est Claude Code. Son nom fait peur, mais c'est simplement Claude qui travaille dans un dossier de votre ordinateur, avec plus de contrôle. Il est disponible dans un onglet de l'application de bureau, sans écran noir ni ligne de commande. Une bonne nouvelle pour finir : une skill enregistrée dans votre compte Claude vous suit dans les trois portes. Attention, la synchronisation va dans un seul sens : une skill créée dans Claude Code reste dans son dossier, et n'apparaît pas dans Chat ou Cowork tant qu'on ne l'a pas importée dans le compte.",
+      script: "Trois portes, une même skill. Chat, c'est la conversation classique, sur le web ou dans l'application : vous dites « aide-moi à créer une skill », Claude vous interroge, rédige, et vous remet un fichier de skill à enregistrer. Cowork, c'est le mode où Claude travaille dans vos dossiers et produit de vrais fichiers. Petite actualité : Chat et Cowork ont fusionné. Il n'y a plus qu'un seul Claude, qui converse et qui agit dans vos dossiers selon ce que vous lui demandez ; on garde ici les deux noms pour distinguer les deux façons de travailler. Rien ne s'est perdu dans la fusion : vos skills, projets et connecteurs ont suivi. Code, enfin, c'est Claude Code. Son nom fait peur, mais c'est simplement Claude qui travaille dans un dossier de votre ordinateur, avec plus de contrôle. Il est disponible dans un onglet de l'application de bureau, sans écran noir ni ligne de commande. Une bonne nouvelle pour finir : une skill enregistrée dans votre compte Claude vous suit dans les trois portes. Attention, la synchronisation va dans un seul sens : une skill créée dans Claude Code reste dans son dossier, et n'apparaît pas dans Chat ou Cowork tant qu'on ne l'a pas importée dans le compte.",
       question: "Qui a déjà utilisé Cowork ? Et Claude Code ? Qui a un peu peur de Claude Code ? (Retenez le nombre de mains : on refera le test à la fin.)",
       transition: "Comparons honnêtement ce que chaque porte apporte… et ce qu'elle coûte.",
     },
@@ -241,12 +241,12 @@ const SLIDES = [
     title: "Avantages et limites",
     cols: [
       ["FaComments", "Chat", ["Rien à installer", "Guidé pas à pas", "Fichier de skill prêt"], ["Ne voit pas vos dossiers", "Fichiers joints un à un"]],
-      ["FaLaptopFile", "Cowork", ["Travaille dans vos dossiers", "Produit de vrais fichiers", "Idéal avec des modèles"], ["Application de bureau", "Selon votre offre"]],
+      ["FaLaptopFile", "Cowork", ["Travaille dans vos dossiers", "Produit de vrais fichiers", "Idéal avec des modèles"], ["Application de bureau", "Dossiers à autoriser"]],
       ["FaTerminal", "Code", ["Voit toute la skill", "Mode plan : relire avant", "Partage d'équipe facile"], ["Intimide au début", "Quelques mots nouveaux"]],
     ],
     notes: {
       objectif: "Donner des critères de choix concrets : avantages et limites de chaque porte pour créer une skill.",
-      script: "Chat. Avantages : rien à installer, ça marche dans le navigateur ; Claude vous guide avec sa skill de création de skills et vous pose les bonnes questions ; à la fin, il vous remet un fichier de skill, qu'il suffit d'enregistrer dans votre compte. Limites : Claude ne voit pas vos dossiers. Il faut joindre les fichiers un à un, et ajouter plus tard un modèle ou un exemple est moins fluide. Cowork. Avantages : Claude travaille directement dans un dossier de votre ordinateur. Il peut lire votre charte en PDF, vos anciens comptes rendus, vos modèles Word, et produire de vrais fichiers. C'est idéal quand la skill s'appuie sur des documents. Limites : il faut l'application de bureau, et la disponibilité dépend de votre offre (fusion en cours avec Chat). Code. Avantages : Claude voit tout le dossier de la skill, donc SKILL.md, exemples et modèles ensemble ; vous pouvez relire son plan avant qu'il ne touche à quoi que ce soit (le mode plan, j'y reviens) ; la skill est un simple dossier, facile à copier, à versionner et à partager avec une équipe ; enfin, on la teste immédiatement en tapant « / » suivi de son nom. Limites : l'interface impressionne la première fois, et il y a quelques mots nouveaux (dossier de travail, permission). C'est tout. Aucune de ces limites n'est technique : c'est de l'habitude.",
+      script: "Chat. Avantages : rien à installer, ça marche dans le navigateur ; Claude vous guide avec sa skill de création de skills et vous pose les bonnes questions ; à la fin, il vous remet un fichier de skill, qu'il suffit d'enregistrer dans votre compte. Limites : Claude ne voit pas vos dossiers. Il faut joindre les fichiers un à un, et ajouter plus tard un modèle ou un exemple est moins fluide. Cowork. Avantages : Claude travaille directement dans un dossier de votre ordinateur. Il peut lire votre charte en PDF, vos anciens comptes rendus, vos modèles Word, et produire de vrais fichiers. C'est idéal quand la skill s'appuie sur des documents. Limites : il faut l'application de bureau pour travailler sur vos dossiers, et il faut autoriser l'accès à chaque dossier. Code. Avantages : Claude voit tout le dossier de la skill, donc SKILL.md, exemples et modèles ensemble ; vous pouvez relire son plan avant qu'il ne touche à quoi que ce soit (le mode plan, j'y reviens) ; la skill est un simple dossier, facile à copier, à versionner et à partager avec une équipe ; enfin, on la teste immédiatement en tapant « / » suivi de son nom. Limites : l'interface impressionne la première fois, et il y a quelques mots nouveaux (dossier de travail, permission). C'est tout. Aucune de ces limites n'est technique : c'est de l'habitude.",
       question: "Pour la skill à laquelle vous pensez depuis le début, quelle porte choisiriez-vous ? Pourquoi ?",
       transition: "Justement, parlons de ces peurs autour de Code.",
     },
@@ -277,21 +277,11 @@ const SLIDES = [
       ["FaUserCheck", "Je valide", "ou je corrige"],
       ["FaPlay", "Il exécute", ""],
     ],
-    keys: ["Shift + Tab", "/plan", "Sélecteur de mode"],
+    keys: ["/plan", "Sélecteur de mode"],
     notes: {
       objectif: "Expliquer le mode plan et pourquoi il rassure : on voit tout avant que rien ne bouge.",
-      script: "Le mode plan est une fonction de Claude Code. Quand il est activé, Claude peut lire vos fichiers et explorer le dossier, mais il n'a pas le droit de modifier quoi que ce soit. Son travail, c'est de vous proposer un plan : « je vais lire charte.pdf, créer tel dossier, écrire tel fichier avec telles sections, puis tester ». Vous lisez ce plan comme un devis. Trois réponses possibles : approuver et le laisser travailler ; approuver en validant chaque modification une par une ; ou dire « continue à planifier » et corriger (« ajoute une section sur les logos », « ne touche pas au dossier Archives »). Trois façons d'entrer en mode plan : les touches Maj + Tab, qui font défiler les modes ; commencer son message par /plan ; ou, dans l'application de bureau, le sélecteur de mode à côté de la zone de message. Pourquoi est-ce idéal pour créer une skill ? Parce qu'une skill, c'est d'abord une structure : quelles étapes, quels exemples, quels fichiers. Le plan vous montre cette structure avant qu'elle n'existe, et c'est le meilleur moment pour la corriger. Astuce : dans Chat, vous pouvez imiter ce fonctionnement en écrivant « propose-moi d'abord un plan, n'écris rien avant mon accord ».",
+      script: "Le mode plan est une fonction de Claude Code. Quand il est activé, Claude peut lire vos fichiers et explorer le dossier, mais il n'a pas le droit de modifier quoi que ce soit. Son travail, c'est de vous proposer un plan : « je vais lire charte.pdf, créer tel dossier, écrire tel fichier avec telles sections, puis tester ». Vous lisez ce plan comme un devis. Trois réponses possibles : approuver et le laisser travailler ; approuver en validant chaque modification une par une ; ou dire « continue à planifier » et corriger (« ajoute une section sur les logos », « ne touche pas au dossier Archives »). Deux façons d'entrer en mode plan : commencer son message par /plan, ou, dans l'application de bureau, choisir « Plan » dans le sélecteur de mode à côté de la zone de message. Pourquoi est-ce idéal pour créer une skill ? Parce qu'une skill, c'est d'abord une structure : quelles étapes, quels exemples, quels fichiers. Le plan vous montre cette structure avant qu'elle n'existe, et c'est le meilleur moment pour la corriger. Astuce : dans Chat, vous pouvez imiter ce fonctionnement en écrivant « propose-moi d'abord un plan, n'écris rien avant mon accord ».",
       question: "Dans votre métier, qu'est-ce qui ressemble à ce « plan avant d'agir » ? (devis, ordre du jour, bon de commande…)",
-      transition: "Voyons à quoi ça ressemble pour créer une vraie skill.",
-    },
-  },
-  {
-    kind: "codedemo", sec: "s4", time: 180,
-    title: "Démo : une skill avec Code",
-    notes: {
-      objectif: "Montrer un parcours complet dans Claude Code, du dossier à la skill testée, en mode plan.",
-      script: "En direct si possible, dans l'onglet Code de l'application de bureau ; sinon, commentez la maquette. Étape 1 : ouvrir un dossier. Ici, « charte » contient la charte graphique en PDF, le logo et un exemple de présentation réussie. Travaillez sur une copie. Étape 2 : passer en mode plan (sélecteur de mode ou Maj + Tab) et écrire : « Crée une skill charte-graphique à partir des fichiers de ce dossier, pour appliquer notre charte à toute présentation ou tout document. » Étape 3 : Claude lit les fichiers et affiche son plan : lire la charte et l'exemple, créer .claude/skills/charte-graphique/SKILL.md, ajouter un fichier de couleurs et de typographie, tester sur une diapo. Lisez-le à voix haute avec la salle et corrigez une chose, pour montrer qu'on garde la main. Étape 4 : approuver en validant chaque modification, pour que la salle voie chaque fichier apparaître (si la session a démarré en mode auto, c'est l'occasion de montrer qu'on peut choisir ce niveau de contrôle). Point de vigilance : si le dossier .claude/skills vient d'être créé pendant la session, Claude Code ne le voit pas encore. Ouvrez une nouvelle session sur le même dossier avant de tester, ou, mieux, créez ce dossier vide à l'avance dans le dossier de démo. Puis tester : tapez /charte-graphique, ou demandez « fais-moi une diapo de bienvenue ». La skill est rangée dans le dossier .claude/skills du projet : quiconque ouvre ce dossier avec Claude Code en profite. Pour l'avoir aussi dans Claude sur le web, demandez à Claude Code de la compresser en .zip, puis importez-la dans Personnaliser › Skills.",
-      question: "Pendant que Claude planifie : « Qu'est-ce que vous voudriez corriger dans ce plan ? »",
       transition: "Récapitulons avec une question simple : quelle porte pour moi ?",
     },
   },
@@ -378,7 +368,7 @@ const SLIDES = [
     bottom: "Le meilleur des deux : créer et tester dans Code, puis importer le .skill dans le compte.",
     notes: {
       objectif: "Distinguer Cowork et Code pour la création de skills : où vit la skill, ce que chacun permet, comment on partage.",
-      script: "Cowork et Code savent tous deux créer une skill avec la méthode complète de skill-creator. La vraie différence, c'est l'endroit où la skill vit. Dans Cowork, elle vit dans votre compte Claude : skill-creator vous remet un fichier .skill, vous cliquez sur « Save skill », et elle est disponible partout où vous êtes connecté, dans Chat, dans Cowork et même dans Claude Code. Dans Code, la skill est un simple dossier, rangé dans .claude/skills du projet ou dans votre dossier personnel : rien à importer, elle marche tout de suite, mais seulement dans Claude Code. La synchronisation va du compte vers Code, jamais dans l'autre sens : pour l'avoir aussi dans Cowork, on compresse le dossier et on l'importe dans le compte. Deuxième différence : Code sait faire des choses que Cowork ne sait pas. Une skill écrite pour Code peut recevoir des paramètres (par exemple /compte-rendu réunion-du-12), lancer une commande pour récupérer des données fraîches avant de démarrer, ou être réservée à un lancement manuel, pour une action sensible. On y a aussi le mode plan, l'historique des versions et la relecture de chaque modification. Troisième différence, le partage : dans Cowork, on publie la skill dans l'organisation (offres Team et Enterprise) ; dans Code, on la range dans le dépôt Git du projet, et toute l'équipe l'obtient avec le projet. Un détail pratique pour la relecture des tests : dans Cowork, skill-creator produit une page de résultats à ouvrir soi-même ; dans Code, elle s'ouvre directement. En pratique : une skill métier pour tous, utilisée dans l'interface de Claude, c'est Cowork. Une skill qu'on veut versionner, faire relire ou partager avec une équipe technique, c'est Code. Et le meilleur des deux mondes : créer et tester dans Code, puis importer le fichier .skill dans le compte pour que tout le monde en profite. Réserve à mentionner : Cowork fusionne en ce moment avec Chat, l'interface peut évoluer.",
+      script: "Cowork et Code savent tous deux créer une skill avec la méthode complète de skill-creator. La vraie différence, c'est l'endroit où la skill vit. Dans Cowork, elle vit dans votre compte Claude : skill-creator vous remet un fichier .skill, vous cliquez sur « Save skill », et elle est disponible partout où vous êtes connecté, dans Chat, dans Cowork et même dans Claude Code. Dans Code, la skill est un simple dossier, rangé dans .claude/skills du projet ou dans votre dossier personnel : rien à importer, elle marche tout de suite, mais seulement dans Claude Code. La synchronisation va du compte vers Code, jamais dans l'autre sens : pour l'avoir aussi dans Cowork, on compresse le dossier et on l'importe dans le compte. Deuxième différence : Code sait faire des choses que Cowork ne sait pas. Une skill écrite pour Code peut recevoir des paramètres (par exemple /compte-rendu réunion-du-12), lancer une commande pour récupérer des données fraîches avant de démarrer, ou être réservée à un lancement manuel, pour une action sensible. On y a aussi le mode plan, l'historique des versions et la relecture de chaque modification. Troisième différence, le partage : dans Cowork, on publie la skill dans l'organisation (offres Team et Enterprise) ; dans Code, on la range dans le dépôt Git du projet, et toute l'équipe l'obtient avec le projet. Un détail pratique pour la relecture des tests : dans Cowork, skill-creator produit une page de résultats à ouvrir soi-même ; dans Code, elle s'ouvre directement. En pratique : une skill métier pour tous, utilisée dans l'interface de Claude, c'est Cowork. Une skill qu'on veut versionner, faire relire ou partager avec une équipe technique, c'est Code. Et le meilleur des deux mondes : créer et tester dans Code, puis importer le fichier .skill dans le compte pour que tout le monde en profite.",
       question: "Pour la skill que vous avez en tête : qui doit l'utiliser, et où ? Cela vous dit déjà quelle porte choisir.",
       transition: "Voyons maintenant skill-creator à l'œuvre.",
     },
@@ -448,15 +438,15 @@ const SLIDES = [
       objectif: "Présenter les modes de partage selon l'offre Claude et le public visé.",
       script: "Premier cercle, vous-même et quelques personnes : on envoie le fichier de la skill (celui que Claude vous a remis à la création, ou un .zip du dossier ; selon la version, le menu de la skill propose aussi de la télécharger, à vérifier le jour J). Le destinataire l'importe avec le bouton « + ». Ça marche quelle que soit l'offre, gratuite, Pro ou Max. Deuxième cercle, votre équipe : en offre Team ou Enterprise, le menu « … » d'une skill propose « Partager » à des collègues choisis (ils peuvent l'activer, pas la modifier) et « Publier dans l'organisation » pour la rendre disponible à tous. Selon le réglage de l'administrateur, la publication peut passer par une relecture ; les skills fournies par l'administrateur sont activées d'office pour tout le monde. Troisième cercle, tout le monde : on publie le dossier sur GitHub, ou on l'emballe dans un plugin avec d'autres skills. Pour les équipes tech, il suffit aussi de déposer la skill dans le dossier .claude/skills d'un projet de code : toute l'équipe l'aura. Rappel : ce que vous partagez, les autres vont le lire… et Claude va l'exécuter. Relisez avant de publier, et n'y mettez jamais de mot de passe ni de donnée personnelle.",
       question: "Dans votre structure, quelle offre avez-vous : individuelle, Team, Enterprise ? Qui est l'administrateur ?",
-      transition: "Vous avez tout. Sortez vos cartons : c'est l'heure du quiz !",
+      transition: "Vous avez tout. Place au quiz !",
     },
   },
   {
     kind: "quizrules", sec: "quiz", time: 30,
-    title: "Quiz : levez votre carton !",
+    title: "Quiz : à vous de répondre !",
     notes: {
-      objectif: "Lancer l'interaction et vérifier que chacun a ses cartons.",
-      script: "Neuf questions. Pour chacune, je lis la question et les quatre réponses, je compte jusqu'à trois et tout le monde lève son carton en même temps. Pas de honte à se tromper : c'est justement ce qui nous intéresse. On regarde la répartition des couleurs dans la salle, puis je révèle la bonne réponse. Si vous n'avez pas de cartons, levez 1 à 4 doigts : un doigt pour A, deux pour B, trois pour C, quatre pour D.",
+      objectif: "Lancer l'interaction orale et en poser la règle.",
+      script: "Neuf questions, à l'oral. Je lis la question et les quatre réponses, je vous laisse quelques secondes de réflexion, puis vous répondez à voix haute : il suffit de dire la lettre. Pas de honte à se tromper : c'est justement ce qui nous intéresse. Quand les avis sont partagés, je demande à quelqu'un de défendre sa réponse avant de révéler la bonne.",
       question: "",
       transition: "Question 1.",
     },
@@ -484,7 +474,7 @@ const SLIDES = [
     title: "Restons en contact",
     notes: {
       objectif: "Laisser les coordonnées affichées pendant l'atelier.",
-      script: "Laissez cette diapo affichée pendant la mise en pratique. Le grand QR code mène au dépôt GitHub qui rassemble tous les supports de la séance : cette présentation, les notes du présentateur en PDF et en Word, les cartons du quiz et les sources pour les régénérer. Invitez la salle à le scanner dès maintenant : le pas-à-pas de l'atelier s'y trouve. Les petits QR codes mènent au profil LinkedIn, au GitHub et à la ressource Claude Academy sur la charte de marque, pour ceux qui veulent refaire le cas d'usage. Pour toute question après la séance, écrivez par mail.",
+      script: "Laissez cette diapo affichée pendant la mise en pratique. Le grand QR code mène au dépôt GitHub qui rassemble tous les supports de la séance : cette présentation, les notes du présentateur en PDF et en Word, et les sources pour les régénérer. Invitez la salle à le scanner dès maintenant : le pas-à-pas de l'atelier s'y trouve. Les petits QR codes mènent au profil LinkedIn, au GitHub et à la ressource Claude Academy sur la charte de marque, pour ceux qui veulent refaire le cas d'usage. Pour toute question après la séance, écrivez par mail.",
       question: "",
       transition: "",
     },
@@ -531,7 +521,7 @@ function expandQuiz(slides) {
         title: `Question ${n}`,
         notes: {
           objectif: `Question ${n} : faire voter la salle.`,
-          script: `Lire la question : « ${item.q} » Puis les réponses : ${item.a.map((t, k) => `${"ABCD"[k]}, ${t}`).join(" ; ")}. Compter « 1, 2, 3, cartons ! » Observer la salle et commenter la répartition (« beaucoup de bleu… quelques verts… ») sans donner d'indice.`,
+          script: `Lire la question : « ${item.q} » Puis les réponses : ${item.a.map((t, k) => `${"ABCD"[k]}, ${t}`).join(" ; ")}. Laisser cinq secondes de réflexion, puis demander les réponses à voix haute. Relever les lettres entendues (« j'entends beaucoup de B… quelques C ») sans donner d'indice.`,
           question: "Un volontaire pour défendre une autre réponse que celle de la majorité ?",
           transition: "Clic : révélation de la réponse.",
         },

@@ -7,7 +7,6 @@
 - `build_pptx.js` : génère le PowerPoint.
 - `render.sh` : exporte le pptx en PDF via Keynote, puis en images (dossier `build/`, vignettes du document distribué).
 - `build_docx.js` : génère le document distribué (.docx), exporté ensuite en PDF via Pages.
-- `build_cartons.py` : génère les cartons A/B/C/D.
 - `check.py` : contrôle les notes, les mots par diapo, le timing (40 à 50 min), les QR codes, les coordonnées, la langue, les textes alternatifs, les titres balisés et les contrastes de la charte.
 
 Tout régénérer :

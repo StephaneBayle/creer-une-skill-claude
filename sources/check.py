@@ -91,7 +91,7 @@ pdf = pymupdf.open(ROOT / "skills-claude-notes-presentateur.pdf")
 if "fr-FR" not in pdf.xref_object(pdf.pdf_catalog()):
     errors.append("pdf : langue non déclarée")
 
-for f in ["skills-claude-notes-presentateur.pdf", "cartons-quiz-ABCD.pdf"]:
+for f in ["skills-claude-notes-presentateur.pdf"]:
     if not (ROOT / f).exists():
         errors.append(f"{f} manquant")
 
